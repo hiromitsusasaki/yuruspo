@@ -9,6 +9,13 @@
 * Ruby 2.5
 * Rails 5.1
 * MySQL 5.7
+* sidekiq
+* Redis 4.0
+
+#### 参考
+[大量メッセージが来ても安心なLINE BOTサーバのアーキテクチャ](https://qiita.com/yoichiro6642/items/6d4c7309210af20a5c8f)
+
+<hr />
 
 ### ローカル環境構築
 
@@ -24,7 +31,7 @@
 [公式サイト](https://ngrok.com/)からngrokの実行ファイルを取得し、実行パスを通す。
 
 
-#### アプリケーションの起動
+#### コンテナの起動
 
 ```sh
 $ docker-compose up
