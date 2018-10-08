@@ -17,3 +17,6 @@ services:
       - "3000:3000"
     depends_on:
       - db
+    environment:
+      - YURUSPO_LINE_CHANNEL_SECRET
+      - YURUSPO_LINE_CHANNEL_TOKEN
