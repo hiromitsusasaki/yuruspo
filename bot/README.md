@@ -1,5 +1,5 @@
 # README
-※後でもっと詳細に書きます*
+*後でもっと詳細に書きます*
 
 ## yurusupo/bot
 
@@ -19,7 +19,7 @@
 
 [公式サイト](https://www.docker.com/products/docker-desktop)からDocker Desktop(Mac/Win)をインストールする。
 
-#### ngrokのインストール
+#### ngrokのインストール
 
 [公式サイト](https://ngrok.com/)からngrokの実行ファイルを取得し、実行パスを通す。
 
@@ -56,11 +56,11 @@ Connections　ttl     opn     rt1     rt5     p50     p90
 
 ##### チャネル（ボットアカウント）を作成する
 
-[Line Developers](https://developers.line.me/ja/)にログインし、動作確認に使うMessaging APIのチャネルを作成する。
+[Line Developers](https://developers.line.me/ja/)にログインし、動作確認に使うMessaging APIのチャネルを作成する。
 
 ##### Webhook URLを設定する
 
-作成したMessaging APIのチャネルのWebhook URLを、起動中のngrokの公開URL（HTTPS）に設定する。
+作成したMessaging APIのチャネルのWebhook URLを、起動中のngrokの公開URL（HTTPS）に設定する。
 
 ex)
 ```

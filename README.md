@@ -11,14 +11,14 @@
 
 <pre>
 yuruspo/
-　├ admin/   ... 管理システム
+　├ admin/   ... 管理システム
 　├ bot/     ... ボット用バックエンドシステム
 　├ webapp/  ... ウェブアプリケーション
 </pre>
 
-* [yuruspo/admin](https://github.com/nbeat/yuruspo/admin)
-* [yuruspo/bot](https://github.com/nbeat/yuruspo/bot)
-* [yuruspo/webapp](https://github.com/nbeat/yuruspo/webapp)
+* [yuruspo/admin](https://github.com/nbeat/yuruspo/tree/master/admin)
+* [yuruspo/bot](https://github.com/nbeat/yuruspo/tree/master/bot)
+* [yuruspo/webapp](https://github.com/nbeat/yuruspo/tree/master/webapp)
 
 サブディレクトリはそれぞれが一つのRailsアプリケーションとして構築される。
 
