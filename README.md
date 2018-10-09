@@ -7,7 +7,7 @@
 
 ### 構成
 
-リポジトリは以下の構成になっている。
+リポジトリは以下の構成になっています。
 
 <pre>
 yuruspo/
@@ -16,13 +16,14 @@ yuruspo/
 　├ webapp/  ... ウェブアプリケーション
 </pre>
 
-* [yuruspo/admin](https://github.com/nbeat/yuruspo/tree/master/admin)
-* [yuruspo/bot](https://github.com/nbeat/yuruspo/tree/master/bot)
-* [yuruspo/webapp](https://github.com/nbeat/yuruspo/tree/master/webapp)
+* [yuruspo/admin](https://github.com/iritec/sports_meet/tree/master/admin)
+* [yuruspo/bot](https://github.com/iritec/sports_meet/tree/master/bot)
+* [yuruspo/webapp](https://github.com/iritec/sports_meet/tree/master/webapp)
 
-サブディレクトリはそれぞれが一つのRailsアプリケーションとして構築される。
+サブディレクトリはそれぞれが一つのRailsアプリケーションとして構築されます。
 
-各Railsアプリケーションが単一のDBを参照するので、将来的にはModel層をRailsEngineでプラグイン化し、共通化をはかる。
+**各Railsアプリケーションが単一のDBを参照するので、将来的にはModel層をRailsEngineでプラグイン化し、共通化をはかります。（後でやる）**
+
 
 
 
