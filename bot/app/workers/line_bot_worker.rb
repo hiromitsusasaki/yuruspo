@@ -1,6 +1,4 @@
-require 'line/bot'
-
-class LineBotEchoWorker
+class LineBotWorker
   include Sidekiq::Worker
 
   def perform(body)
