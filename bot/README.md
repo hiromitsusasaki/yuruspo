@@ -23,14 +23,19 @@ RailsによるAPIアプリケーションとしてLineサーバからのHTTPリ�
 
 ![画像](https://dl.dropboxusercontent.com/s/jd4q7y0rom6vn2q/yuruspo_flow.png)
 
+#### 処理フロー
+
+Lineボットのバックエンドは基本的に下記のフローで処理を実行していきます。
+
+![画像](https://dl.dropboxusercontent.com/s/foa160i5ikl5r16/bot_process_flow_chart.png)
+
+#### データモデル
+**検討中**
+
 #### クラス設計の方針
 
-ControllerはLineサーバからのリクエストを受け付けることのみを行います。(Webhook)<br />
-ModelはDBとのやり取り及びそのModel固有の処理を担当するようにします。<br />
-実際の処理（ビジネスロジック）はServiceクラスとして実装して、そのServiceをWorkerに実行させるような設計を考えています。
-
-**が、この設計で本当に良いのかちょっと悩んでます。ご意見頂きたいです。**
-
+ControllerはLineサーバからのリクエストを受け付けることのみ(Webhook)を行います。ModelはDBとのやり取り及びそのModel固有の処理を担当するようにします。実際の処理（ビジネスロジック）はServiceクラスとして実装して、そのServiceをWorkerに実行させるような設計を考えています。**が、この設計で本当に良いのかちょっと悩んでます。ご意見頂きたいです。**<br />
+メッセージタイプ/送信元情報/送信内容を元に実行する処理（Service）が分岐するのですが、この辺を上手く分割できるように綺麗な設計を考え中です。
 
 #### 参考
 [Railsで導入してよかったデザインパターンと各クラスの役割について](http://masato-hi.hatenablog.jp/entry/2016/03/19/161712)
