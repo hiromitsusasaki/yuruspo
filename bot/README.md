@@ -1,6 +1,7 @@
 # README
 
 このREADMEの内容はまだまだ検討中の段階です。皆さんの忌憚のないご意見をお待ちしています。
+また、このREADMEの内容は、適宜wikiに移動していきます。
 
 ## yurusupo/bot
 
@@ -31,6 +32,9 @@ Lineボットのバックエンドは基本的に下記のフローで処理を�
 
 #### データモデル
 **検討中**
+
+作成途中のER図
+![画像](https://dl.dropboxusercontent.com/s/9mi1r71ey57w7l0/yuruspo_erd.png)
 
 #### クラス設計の方針
 
@@ -128,10 +132,10 @@ YURUSPO_LINE_CHANNEL_TOKEN={アクセストークン}
 
 MacとかUnix系OSの場合はshellの設定ファイルに
 ```
-$ vim ~/.zshrc
+$ vim ~/.bashrc
 ```
 下記のように記載して
-```sh
+```
 ...
 export YURUSPO_LINE_CHANNEL_SECRET={Channel Secret}
 export YURUSPO_LINE_CHANNEL_TOKEN={アクセストークン}
@@ -139,7 +143,7 @@ export YURUSPO_LINE_CHANNEL_TOKEN={アクセストークン}
 ```
 下記のように再読込すればOKです。
 ```
-$ source ~/.zshrc
+$ source ~/.bashrc
 ```
 
 #### Dockerコンテナの起動
