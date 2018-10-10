@@ -7,6 +7,7 @@ class LineBotWebhookController < ApplicationController
     signature = request.env['HTTP_X_LINE_SIGNATURE']
     unless LineBotUtil.client.validate_signature(body, signature)
       render status: 400
+      return
     end
     LineBotWorker.perform_async body
     render status: 200
