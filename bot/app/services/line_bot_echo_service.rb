@@ -1,12 +1,16 @@
 class LineBotEchoService
 
   def call(body)
+    puts 'start service.'
     events = LineBotUtil.client.parse_events_from(body)
     events.each do |event|
+      puts 'start processing to event.'
       case event
       when Line::Bot::Event::Message
+        puts 'event is message.'
         case event.type
         when Line::Bot::Event::MessageType::Text
+          puts 'message is text.'
           message = {
             type: 'text',
             text: event.message['text']
@@ -19,6 +23,7 @@ class LineBotEchoService
           Line::Bot::Event::MessageType::Location,
           Line::Bot::Event::MessageType::Sticker,
           Line::Bot::Event::MessageType::Unsupport
+          puts 'message is not text.'
           message = {
             type: 'text',
             text: "can't recoginize."
@@ -26,8 +31,8 @@ class LineBotEchoService
           LineBotUtil.client.reply_message(event['replyToken'], message)
         end
       end
+      puts 'end processing to event.'
     end
+    puts 'end service.'
   end
-
-
 end

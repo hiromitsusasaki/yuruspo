@@ -122,7 +122,7 @@ $ git clone https://github.com/iritec/sports_meet
 ローカルのホストOSの環境変数に以下のような形式で、「チャネル基本設定」の「Channel Secret」と「アクセストークン」を設定してください。
 
 ```
-YURUSPO_LINE_CHANNEL_SECRET={Channel Secret}}
+YURUSPO_LINE_CHANNEL_SECRET={Channel Secret}
 YURUSPO_LINE_CHANNEL_TOKEN={アクセストークン}
 ```
 
@@ -157,7 +157,7 @@ $ docker-compose up --build
 上記コマンドで、バックエンドのウェブアプリ（app)、MySQL(db)、Redis(redis)、ジョブワーカー(worker)の4つのコンテナが立ち上がり、システムが起動します。
 
 この状態だと、ターミナルに各コンテナのログが表示され続けます。
-コンテナを終了したい場合は、command+cで停止した後に、
+コンテナを終了したい場合は、ctrl+cで停止した後に、
 
 ```
 $ docker-compose down
