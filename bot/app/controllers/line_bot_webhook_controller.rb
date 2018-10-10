@@ -9,7 +9,7 @@ class LineBotWebhookController < ApplicationController
       render status: 400
       return
     end
-    LineBotWorker.perform_async body
     render status: 200
+    LineBotWorker.perform_async body
   end
 end
