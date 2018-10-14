@@ -22,6 +22,9 @@ module LineBot
     end
 
     def send
+      if @response.nil?
+        raise 'Response is nil.'
+      end
       @response.send
     end
 
