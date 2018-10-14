@@ -8,7 +8,7 @@ module LineBot
       when Line::Bot::Event::Message
         case line_bot_event.type
         when Line::Bot::Event::MessageType::Text
-          @response = LineBot::EchoResponse.new(line_bot_event)
+          @response = LineBot::Response::EchoResponse.new(line_bot_event)
         when Line::Bot::Event::MessageType::Image,
           Line::Bot::Event::MessageType::Video,
           Line::Bot::Event::MessageType::Audio,
@@ -16,7 +16,7 @@ module LineBot
           Line::Bot::Event::MessageType::Location,
           Line::Bot::Event::MessageType::Sticker,
           Line::Bot::Event::MessageType::Unsupport
-          @response = LineBot::ErrorResponse.new(line_bot_event)
+          @response = LineBot::Response::ErrorResponse.new(line_bot_event)
         end
       end
     end
