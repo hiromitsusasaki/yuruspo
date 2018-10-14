@@ -8,8 +8,8 @@ module LineBot
     end
 
     def send
-      raise LineBot::BaseResponse::NOT_OVEßRRIDE
+      raise LineBot::BaseResponse::NOT_OVERRIDE
     end
-    
+
   end
 end

@@ -1,5 +1,5 @@
 module LineBot
-  class Respond
+  class Responder
 
     attr_accessor :response
 
