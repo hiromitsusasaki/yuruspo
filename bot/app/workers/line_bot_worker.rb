@@ -2,6 +2,6 @@ class LineBotWorker
   include Sidekiq::Worker
 
   def perform(body)
-    LineBotEchoService.new.call(body)
+    LineBot::Service.new.call(body)
   end
 end
