@@ -1,14 +1,10 @@
 module LineBot
   module Response
     class BaseResponse
-      NOT_OVERRIDE = 'not override error'
+      attr_accessor :next
 
-      def initialize(_line_bot_event)
-        @line_bot_event = _line_bot_event
-      end
-
-      def send
-        raise LineBot::BaseResponse::NOT_OVERRIDE
+      def initialize
+        @next = nil
       end
     end
   end
