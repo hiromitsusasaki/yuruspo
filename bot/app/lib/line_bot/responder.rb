@@ -1,32 +1,18 @@
 module LineBot
   class Responder
 
-    attr_accessor :response
+    attr_accessor :line_bot_event
 
-    def initialize(line_bot_event)
-      case line_bot_event
-      when Line::Bot::Event::Message
-        case line_bot_event.type
-        when Line::Bot::Event::MessageType::Text
-          @response = LineBot::Response::EchoResponse.new(line_bot_event)
-        when Line::Bot::Event::MessageType::Image,
-          Line::Bot::Event::MessageType::Video,
-          Line::Bot::Event::MessageType::Audio,
-          Line::Bot::Event::MessageType::File,
-          Line::Bot::Event::MessageType::Location,
-          Line::Bot::Event::MessageType::Sticker,
-          Line::Bot::Event::MessageType::Unsupport
-          @response = LineBot::Response::ErrorResponse.new(line_bot_event)
-        end
-      end
+    def initialize(_line_bot_event)
+      @line_bot_event = _line_bot_event
     end
-
     def send
-      if @response.nil?
-        raise 'Response is nil.'
-      end
-      @response.send
+      echo_response = LineBot::Response::EchoResponse.new
+      image_response = LineBot::Response::ImageResponse.new      
+      echo_response.next = image_response
+      error_response = LineBot::Response::ErrorResponse.new
+      image_response.next = error_response
+      echo_response.send(@line_bot_event)
     end
-
   end
 end

@@ -1,11 +1,11 @@
 module LineBot
   module Response
-    class EchoResponse < BaseResponse
+    class ImageResponse < BaseResponse
       def send(line_bot_event)
         case line_bot_event
         when Line::Bot::Event::Message
           case line_bot_event.type
-          when Line::Bot::Event::MessageType::Text
+          when Line::Bot::Event::MessageType::Image
             run(line_bot_event)
             return true
           end
@@ -14,11 +14,11 @@ module LineBot
         @next.send(line_bot_event)
       end
 
-      private 
+      private
       def run(line_bot_event)
         message = {
           type: 'text',
-          text: line_bot_event.message['text']
+          text: '素敵な写真ですね。'
         }
         LineBot::Client.instance.reply_message(line_bot_event['replyToken'], message)
       end
