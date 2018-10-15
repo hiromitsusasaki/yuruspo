@@ -5,8 +5,7 @@ module LineBot
         case line_bot_event
         when Line::Bot::Event::Message
           case line_bot_event.type
-          when Line::Bot::Event::MessageType::Image,
-            Line::Bot::Event::MessageType::Video,
+          when Line::Bot::Event::MessageType::Video,
             Line::Bot::Event::MessageType::Audio,
             Line::Bot::Event::MessageType::File,
             Line::Bot::Event::MessageType::Location,
