@@ -47,3 +47,5 @@ gem 'line-bot-api'
 gem 'sidekiq'
 
 gem 'devise'
+
+gem 'omniauth-line'
