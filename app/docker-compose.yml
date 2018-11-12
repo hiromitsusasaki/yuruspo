@@ -18,7 +18,7 @@ services:
 
   app:
     build: .
-    command: /bin/sh -c "rm -f /yuruspo/tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    command: /bin/sh -c "rm -f /yuruspo_bot/tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     volumes:
       - .:/yuruspo_bot
     ports:
