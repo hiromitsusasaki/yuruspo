@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  activity: one
+  join_member_number: 1
+  is_determined: false
+
+two:
+  user: two
+  activity: two
+  join_member_number: 1
+  is_determined: false
