@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181113060952) do
+ActiveRecord::Schema.define(version: 20181113061134) do
 
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "circle_id"
@@ -24,6 +24,17 @@ ActiveRecord::Schema.define(version: 20181113060952) do
     t.datetime "updated_at", null: false
     t.index ["circle_id"], name: "index_activities_on_circle_id"
     t.index ["place_content_id"], name: "index_activities_on_place_content_id"
+  end
+
+  create_table "activity_reviews", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "user_id"
+    t.bigint "activity_id"
+    t.integer "evaluation"
+    t.text "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["activity_id"], name: "index_activity_reviews_on_activity_id"
+    t.index ["user_id"], name: "index_activity_reviews_on_user_id"
   end
 
   create_table "applications", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -152,6 +163,8 @@ ActiveRecord::Schema.define(version: 20181113060952) do
 
   add_foreign_key "activities", "circles"
   add_foreign_key "activities", "place_contents"
+  add_foreign_key "activity_reviews", "activities"
+  add_foreign_key "activity_reviews", "users"
   add_foreign_key "applications", "activities"
   add_foreign_key "applications", "users"
   add_foreign_key "areas", "cities"
