@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  circle: one
+  place_content: one
+  max_member_number: 1
+  auto_reply_comment: MyText
+  date: 2018-11-13
+  start_time: 2018-11-13 06:04:42
+  end_time: 2018-11-13 06:04:42
+
+two:
+  circle: two
+  place_content: two
+  max_member_number: 1
+  auto_reply_comment: MyText
+  date: 2018-11-13
+  start_time: 2018-11-13 06:04:42
+  end_time: 2018-11-13 06:04:42

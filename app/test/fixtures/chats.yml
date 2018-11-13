@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  activity: one
+  application: one
+  speaker: 1
+  body: MyText
+
+two:
+  activity: two
+  application: two
+  speaker: 1
+  body: MyText
