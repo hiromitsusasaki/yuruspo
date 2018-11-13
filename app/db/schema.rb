@@ -10,7 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181113060233) do
+ActiveRecord::Schema.define(version: 20181113060442) do
+
+  create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "circle_id"
+    t.bigint "place_content_id"
+    t.integer "max_member_number"
+    t.text "auto_reply_comment"
+    t.date "date"
+    t.time "start_time"
+    t.time "end_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["circle_id"], name: "index_activities_on_circle_id"
+    t.index ["place_content_id"], name: "index_activities_on_place_content_id"
+  end
 
   create_table "areas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -117,6 +131,8 @@ ActiveRecord::Schema.define(version: 20181113060233) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "activities", "circles"
+  add_foreign_key "activities", "place_contents"
   add_foreign_key "areas", "cities"
   add_foreign_key "circle_contents", "circles"
   add_foreign_key "circle_contents", "contents"
