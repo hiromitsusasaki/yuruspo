@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181113055816) do
+ActiveRecord::Schema.define(version: 20181113055933) do
 
   create_table "areas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -78,6 +78,15 @@ ActiveRecord::Schema.define(version: 20181113055816) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "user_areas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "user_id"
+    t.bigint "area_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["area_id"], name: "index_user_areas_on_area_id"
+    t.index ["user_id"], name: "index_user_areas_on_user_id"
+  end
+
   create_table "user_blocks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "user_id"
     t.bigint "circle_id"
@@ -106,6 +115,8 @@ ActiveRecord::Schema.define(version: 20181113055816) do
   add_foreign_key "place_contents", "contents"
   add_foreign_key "place_contents", "places"
   add_foreign_key "places", "areas"
+  add_foreign_key "user_areas", "areas"
+  add_foreign_key "user_areas", "users"
   add_foreign_key "user_blocks", "circles"
   add_foreign_key "user_blocks", "users"
 end
