@@ -49,3 +49,5 @@ gem 'sidekiq'
 gem 'devise'
 
 gem 'omniauth-line'
+
+gem 'seed-fu'
