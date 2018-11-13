@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181113053229) do
+ActiveRecord::Schema.define(version: 20181113053357) do
 
   create_table "circles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -21,6 +21,14 @@ ActiveRecord::Schema.define(version: 20181113053229) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_circles_on_user_id"
+  end
+
+  create_table "contents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name"
+    t.bigint "event_type_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_type_id"], name: "index_contents_on_event_type_id"
   end
 
   create_table "event_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -51,6 +59,7 @@ ActiveRecord::Schema.define(version: 20181113053229) do
   end
 
   add_foreign_key "circles", "users"
+  add_foreign_key "contents", "event_types"
   add_foreign_key "user_blocks", "circles"
   add_foreign_key "user_blocks", "users"
 end
