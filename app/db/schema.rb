@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181113055933) do
+ActiveRecord::Schema.define(version: 20181113060233) do
 
   create_table "areas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
@@ -18,6 +18,15 @@ ActiveRecord::Schema.define(version: 20181113055933) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["city_id"], name: "index_areas_on_city_id"
+  end
+
+  create_table "circle_contents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "circle_id"
+    t.bigint "content_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["circle_id"], name: "index_circle_contents_on_circle_id"
+    t.index ["content_id"], name: "index_circle_contents_on_content_id"
   end
 
   create_table "circles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -109,6 +118,8 @@ ActiveRecord::Schema.define(version: 20181113055933) do
   end
 
   add_foreign_key "areas", "cities"
+  add_foreign_key "circle_contents", "circles"
+  add_foreign_key "circle_contents", "contents"
   add_foreign_key "circles", "users"
   add_foreign_key "cities", "prefectures"
   add_foreign_key "contents", "event_types"
