@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181113061134) do
+ActiveRecord::Schema.define(version: 20181113062553) do
 
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "circle_id"
@@ -54,6 +54,17 @@ ActiveRecord::Schema.define(version: 20181113061134) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["city_id"], name: "index_areas_on_city_id"
+  end
+
+  create_table "chats", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "activity_id"
+    t.bigint "application_id"
+    t.integer "speaker", limit: 1, default: 0, null: false
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["activity_id"], name: "index_chats_on_activity_id"
+    t.index ["application_id"], name: "index_chats_on_application_id"
   end
 
   create_table "circle_contents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -168,6 +179,8 @@ ActiveRecord::Schema.define(version: 20181113061134) do
   add_foreign_key "applications", "activities"
   add_foreign_key "applications", "users"
   add_foreign_key "areas", "cities"
+  add_foreign_key "chats", "activities"
+  add_foreign_key "chats", "applications"
   add_foreign_key "circle_contents", "circles"
   add_foreign_key "circle_contents", "contents"
   add_foreign_key "circles", "users"
