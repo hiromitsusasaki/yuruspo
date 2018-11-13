@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181113060839) do
+ActiveRecord::Schema.define(version: 20181113060952) do
 
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "circle_id"
@@ -87,6 +87,14 @@ ActiveRecord::Schema.define(version: 20181113060839) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "messages", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "activity_id"
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["activity_id"], name: "index_messages_on_activity_id"
+  end
+
   create_table "place_contents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "place_id"
     t.bigint "content_id"
@@ -152,6 +160,7 @@ ActiveRecord::Schema.define(version: 20181113060839) do
   add_foreign_key "circles", "users"
   add_foreign_key "cities", "prefectures"
   add_foreign_key "contents", "event_types"
+  add_foreign_key "messages", "activities"
   add_foreign_key "place_contents", "contents"
   add_foreign_key "place_contents", "places"
   add_foreign_key "places", "areas"
