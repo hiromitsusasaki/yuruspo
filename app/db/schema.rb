@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181113135120) do
+ActiveRecord::Schema.define(version: 20181113140423) do
 
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "circle_id"
@@ -169,6 +169,7 @@ ActiveRecord::Schema.define(version: 20181113135120) do
     t.text "status_message"
     t.string "picture_url"
     t.boolean "is_circle_admin"
+    t.string "line_user_id"
   end
 
   add_foreign_key "activities", "circles"
