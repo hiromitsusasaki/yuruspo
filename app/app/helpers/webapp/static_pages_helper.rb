@@ -1,0 +1,2 @@
+module Webapp::StaticPagesHelper
+end
