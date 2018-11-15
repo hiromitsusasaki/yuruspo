@@ -1,0 +1,2 @@
+module Webapp::MessagesHelper
+end

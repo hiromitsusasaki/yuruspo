@@ -1,0 +1,2 @@
+module Webapp::ChatsHelper
+end
