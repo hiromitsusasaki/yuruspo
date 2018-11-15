@@ -49,3 +49,11 @@ gem 'sidekiq'
 gem 'omniauth-line'
 
 gem 'seed-fu'
+
+gem 'bootstrap'
+
+gem 'jquery-rails'
+
+gem 'mini_racer'
+
+gem 'turbolinks'
