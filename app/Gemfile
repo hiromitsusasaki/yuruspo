@@ -49,3 +49,7 @@ gem 'sidekiq'
 gem 'omniauth-line'
 
 gem 'seed-fu'
+
+gem 'bootstrap'
+
+gem 'jquery-rails'
