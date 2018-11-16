@@ -27,19 +27,19 @@ https://github.com/irie-dev/sports_meet/wiki/%E3%83%AD%E3%83%BC%E3%82%AB%E3%83%A
 ```
 $ cd app
 ```
-docker-compose runコマンドでコンテナを起動して、コンテナ上でDB作成コマンドを実行します。
+docker-compose runコマンドでコンテナを起動して、コンテナ上でDB作成コマンドを実行します。
 ```
 $ docker-compose run app bundle exec rails db:create
 ```
 
 ## Database initialization
 
-docker-compose runコマンドでコンテナを起動して、コンテナ上でDBマイグレーションコマンドを実行します。
+docker-compose runコマンドでコンテナを起動して、コンテナ上でDBマイグレーションコマンドを実行します。
 ```
 $ docker-compose run app bundle exec rails db:migrate
 ```
 
-また、住所情報のマスタ系データ（都道府県、市区町村、エリア）を下記のコマンドで挿入できます。
+また、住所情報のマスタ系データ（都道府県、市区町村、エリア）を下記のコマンドで挿入できます。
 ```
 $ docker-compose run app bundle exec rails db:seed_fu
 ```
