@@ -39,7 +39,7 @@ docker-compose runコマンドでコンテナを起動して、コンテナ上�
 $ docker-compose run app bundle exec rails db:migrate
 ```
 
-また、住所情報のマスタ系データ（都道府県、市区町村、エリア）を下記のコマンドで挿入できます。
+また、住所情報のマスタ系データ（都道府県、市区町村、エリア）を下記のコマンドで挿入できます。
 ```
 $ docker-compose run app bundle exec rails db:seed_fu
 ```
