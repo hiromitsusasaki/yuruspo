@@ -2,7 +2,8 @@ require 'sidekiq/web'
 Rails.application.routes.draw do
   
   # linebot callback
-  post '/line/callback', to: 'bot/line_webhook#callback'
+  post '/line/callback_for_user', to: 'bot/line_webhook#callback_for_user'
+  post '/line/callback_for_circle', to: 'bot/line_webhook#callback_for_circle'
   
   mount Sidekiq::Web, at: '/sidekiq'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
