@@ -13,3 +13,28 @@
  */
 
 @import "bootstrap";
+@import "jquery.sidr.light.css";
+
+body {
+  width: 100%;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+
+.main {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 0;
+  height: 100vh;
+  box-shadow: 2px 2px 4px gray;
+}
+
+.header-nav {
+  border-bottom: 1px solid #dfdfdf;
+}
+
+.blue {
+  fill: #1587CA;
+}

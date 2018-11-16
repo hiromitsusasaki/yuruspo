@@ -3,13 +3,43 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript">
+      if ((navigator.userAgent.indexOf('iPhone') > 0) || navigator.userAgent.indexOf('iPod') > 0 || navigator.userAgent.indexOf('Android') > 0) {
+        document.write('<meta name="viewport" content="width=device-width,initial-scale=1">');
+      } else {
+        document.write('<meta name="viewport" content="width=1200">');
+      }
+    </script>
     <title>App</title>
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script>
+      $(document).ready(function() {
+        $('#simple-menu').sidr({
+          side: 'right'
+        });
+      });
+    </script>
   </head>
   <body>
-    <%= yield %>
+    <div id="sidr">
+      <ul>
+        <li><a href="#">ログアウト</a></li>
+      </ul>
+    </div>
+    <div class="main">
+      <nav class="navbar navbar-light bg-light header-nav">
+        <a class="navbar-brand" href="#">
+          <%= image_tag 'logo.png', :size => "100x25" %>
+        </a>
+        <a id="simple-menu" href="#sidr">
+          <%= octicon "three-bars", :height => 32,  :class => "right left blue", :"aria-label" => "hi" %>
+        </a>
+      </nav>
+      <div class="container">
+      <%= yield %>
+      <div>
+    </div>
   </body>
 </html>
