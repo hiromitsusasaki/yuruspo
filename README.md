@@ -9,8 +9,8 @@
 リポジトリは以下の構成になっています。
 
 <pre>
-yuruspo/
+sports_meet/
 　├ app/     ... ボット用バックエンド、ウェブアプリを含むモノリシックなRailsプロジェクト
 </pre>
 
-* [yuruspo/app](https://github.com/iritec/sports_meet/tree/master/app)
+* [sports_meet/app](https://github.com/iritec/sports_meet/tree/master/app)
