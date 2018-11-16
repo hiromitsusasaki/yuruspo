@@ -57,3 +57,5 @@ gem 'jquery-rails'
 gem 'mini_racer'
 
 gem 'turbolinks'
+
+gem 'octicons_helper'
