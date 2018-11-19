@@ -7,6 +7,6 @@ class User < ApplicationRecord
   has_many :user_blocks
   has_many :activity_reviews
   has_one :circle
-
+  belongs_to :owned_circle, :class_name => 'Circle'
 
 end

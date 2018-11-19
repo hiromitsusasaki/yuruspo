@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181119094926) do
+ActiveRecord::Schema.define(version: 20181119111858) do
 
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "circle_id"
@@ -168,8 +168,9 @@ ActiveRecord::Schema.define(version: 20181119094926) do
     t.string "display_name"
     t.text "status_message"
     t.string "picture_url"
-    t.boolean "is_circle_admin"
     t.string "line_user_id"
+    t.bigint "owned_circle_id"
+    t.index ["owned_circle_id"], name: "index_users_on_owned_circle_id"
   end
 
   add_foreign_key "activities", "circles"
@@ -194,4 +195,5 @@ ActiveRecord::Schema.define(version: 20181119094926) do
   add_foreign_key "user_areas", "users"
   add_foreign_key "user_blocks", "circles"
   add_foreign_key "user_blocks", "users"
+  add_foreign_key "users", "circles", column: "owned_circle_id"
 end
