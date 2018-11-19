@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181113140423) do
+ActiveRecord::Schema.define(version: 20181119094448) do
 
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "circle_id"
@@ -41,7 +41,6 @@ ActiveRecord::Schema.define(version: 20181113140423) do
     t.bigint "user_id"
     t.bigint "activity_id"
     t.integer "join_member_number"
-    t.boolean "is_determined"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["activity_id"], name: "index_applications_on_activity_id"
