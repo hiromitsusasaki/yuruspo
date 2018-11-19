@@ -78,13 +78,13 @@ ActiveRecord::Schema.define(version: 20181119094926) do
 
   create_table "circles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
-    t.bigint "user_id"
+    t.bigint "owner_id"
     t.text "introduction"
-    t.string "introduction_img_url"
+    t.string "introduction_picture_url"
     t.text "default_auto_reply_comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_circles_on_user_id"
+    t.index ["owner_id"], name: "index_circles_on_owner_id"
   end
 
   create_table "cities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -183,7 +183,7 @@ ActiveRecord::Schema.define(version: 20181119094926) do
   add_foreign_key "chats", "applications"
   add_foreign_key "circle_contents", "circles"
   add_foreign_key "circle_contents", "contents"
-  add_foreign_key "circles", "users"
+  add_foreign_key "circles", "users", column: "owner_id"
   add_foreign_key "cities", "prefectures"
   add_foreign_key "contents", "event_types"
   add_foreign_key "messages", "activities"
