@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181113140423) do
+ActiveRecord::Schema.define(version: 20181119111858) do
 
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "circle_id"
@@ -41,9 +41,9 @@ ActiveRecord::Schema.define(version: 20181113140423) do
     t.bigint "user_id"
     t.bigint "activity_id"
     t.integer "join_member_number"
-    t.boolean "is_determined"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "status", limit: 1, default: 0, null: false
     t.index ["activity_id"], name: "index_applications_on_activity_id"
     t.index ["user_id"], name: "index_applications_on_user_id"
   end
@@ -78,13 +78,13 @@ ActiveRecord::Schema.define(version: 20181113140423) do
 
   create_table "circles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
-    t.bigint "user_id"
+    t.bigint "owner_id"
     t.text "introduction"
-    t.string "introduction_img_url"
+    t.string "introduction_picture_url"
     t.text "default_auto_reply_comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_circles_on_user_id"
+    t.index ["owner_id"], name: "index_circles_on_owner_id"
   end
 
   create_table "cities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -168,8 +168,9 @@ ActiveRecord::Schema.define(version: 20181113140423) do
     t.string "display_name"
     t.text "status_message"
     t.string "picture_url"
-    t.boolean "is_circle_admin"
     t.string "line_user_id"
+    t.bigint "owned_circle_id"
+    t.index ["owned_circle_id"], name: "index_users_on_owned_circle_id"
   end
 
   add_foreign_key "activities", "circles"
@@ -183,7 +184,7 @@ ActiveRecord::Schema.define(version: 20181113140423) do
   add_foreign_key "chats", "applications"
   add_foreign_key "circle_contents", "circles"
   add_foreign_key "circle_contents", "contents"
-  add_foreign_key "circles", "users"
+  add_foreign_key "circles", "users", column: "owner_id"
   add_foreign_key "cities", "prefectures"
   add_foreign_key "contents", "event_types"
   add_foreign_key "messages", "activities"
@@ -194,4 +195,5 @@ ActiveRecord::Schema.define(version: 20181113140423) do
   add_foreign_key "user_areas", "users"
   add_foreign_key "user_blocks", "circles"
   add_foreign_key "user_blocks", "users"
+  add_foreign_key "users", "circles", column: "owned_circle_id"
 end

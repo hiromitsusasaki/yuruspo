@@ -5,7 +5,6 @@ class AddColumnsToUser < ActiveRecord::Migration[5.1]
     add_column :users, :display_name, :string
     add_column :users, :status_message, :text
     add_column :users, :picture_url, :string
-    add_column :users, :is_circle_admin, :boolean
 
   end
 end
