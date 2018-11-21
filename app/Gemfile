@@ -61,3 +61,5 @@ gem 'mini_racer'
 gem 'turbolinks'
 
 gem 'octicons_helper'
+
+gem 'mongoid'
