@@ -6,11 +6,19 @@ class LineBot::ForCircle::Responder
   end
 
   def send
-    echo_response = LineBot::ForCircle::Response::EchoResponse.new
-    image_response = LineBot::ForCircle::Response::ImageResponse.new
-    echo_response.next = image_response
-    error_response = LineBot::ForCircle::Response::ErrorResponse.new
-    image_response.next = error_response
-    echo_response.send(@line_bot_event)
+    responses = []
+    # responses.push(LineBot::ForCircle::Response::EchoResponse.new)
+    responses.push(LineBot::ForCircle::Response::ImageResponse.new)
+    responses.push(LineBot::ForCircle::Response::TextResponse::HelpResponse.new)
+    responses.push(LineBot::ForCircle::Response::ErrorResponse.new)
+    set_chain_of responses
+    responses[0].send(@line_bot_event)
+  end
+
+  # 一つ後ろのindexの中身をnextに指定
+  def set_chain_of responses
+    responses.each_with_index{|response, index|
+      response.next = responses[index + 1] unless index == responses.count
+    }
   end
 end
