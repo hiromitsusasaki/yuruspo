@@ -28,7 +28,7 @@ class LineBot::ForUser::Response::TextResponse::HelpResponse < LineBot::ForUser:
     messages = [
       {
         type: 'text',
-        text: 'こんにちは！\n下のヘルプメニューから好きなヘルプを選んでね！'
+        text: "こんにちは！\n下のヘルプメニューから好きなヘルプを選んでね！"
       },
       {
         type: 'imagemap',#TODO: 直す
@@ -78,29 +78,27 @@ class LineBot::ForUser::Response::TextResponse::HelpResponse < LineBot::ForUser:
   def to_howto_messages
     messages = [
       {
-        type: text,
-        text: "スポーツの仕方だね！
-        企画に参加するまでの流れはこんな感じだよ！
+        type: 'text',
+        text: "スポーツの仕方だね！\n企画に参加するまでの流れはこんな感じだよ！\n\n1. メニューから赤色の「スポーツしたい！」を押す！\n\n2. 僕がする「競技, 地域, 時間」の三つの質問に答える！\n\n3. 企画が送られてくるからそれをみる！ちなみにそのページから企画者とチャットもできるよ！\n\n4. 参加してみたい企画だったら参加希望ボタンをおす！\n\n5. 参加希望が承認されたら企画に遊びに行ってスポーツができるよ！\n\nもっと詳しい手順がみたいときはここから見れるよ！\n気になったらみてね！\nリンク" #TODO: リンク
+      }
+    ]
+    return messages
+  end
 
-        1. メニューから赤色の「スポーツしたい！」を押す！
-
-        2. 僕がする「競技, 地域, 時間」の三つの質問に答える！
-
-        3. 企画が送られてくるからそれをみる！ちなみにそのページから企画者とチャットもできるよ！
-
-        4. 参加してみたい企画だったら参加希望ボタンをおす！
-
-        5. 参加希望が承認されたら企画に遊びに行ってスポーツができるよ！
-
-        もっと詳しい手順がみたいときはここから見れるよ！
-        気になったらみてね！"
+  def to_frecent_questions_messages
+    messages = [
+      {
+        type: "text",
+        text: "よくある質問だね！\nよくある質問はこのページにまとめられてるよ！\n見てみてね！\nリンク"#TODO リンク
+      },
+      {
+        type: "text",
+        text: "もしよくある質問に知りたい情報がなかったらお問い合わせから気軽に質問してね！\n僕を作った人が対応するよ！"
       }
     ]
   end
 
-  def to_frecent_questions_messages
-  end
-
   def to_inquiry_messages
+    #TODO: どんな仕様にしましょうかね。笑
   end
 end
