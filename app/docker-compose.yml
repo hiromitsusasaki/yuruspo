@@ -1,5 +1,16 @@
 version: '3'
 services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    environment:
+      -  MONGODB_USER=root
+      -  MONGODB_PASS=password
+    volumes:
+      - './data/mongodb:/data/db'
+    ports:
+      - '27017:27017'
+    command: mongod --smallfiles  
   db:
     image: mysql:5.7
     environment:
@@ -26,6 +37,7 @@ services:
     depends_on:
       - db
       - redis
+      - mongodb
     environment:
       - YURUSPO_LINE_CHANNEL_FOR_USER_SECRET
       - YURUSPO_LINE_CHANNEL_FOR_USER_TOKEN
@@ -54,4 +66,5 @@ services:
     depends_on:
       - db
       - redis
+      - mongodb
     command: bundle exec sidekiq
