@@ -19,6 +19,7 @@ class LineBot::ForUser::Response::TextResponse < LineBot::ForUser::Response::Bas
         when *@trigger_texts
           # runを実行
           run(line_bot_event)
+          return true
         end
       end
     end
