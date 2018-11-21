@@ -28,10 +28,10 @@ development:
         #     - use: web
 
         # The name of the user for authentication.
-        user: 'root'
+        # user: 'root'
 
         # The password of the user for authentication.
-        password: 'password'
+        # password: 'password'
 
         # The user's database roles.
         # roles:
@@ -159,8 +159,6 @@ test:
       hosts:
         - mongodb:27017
       options:
-        user: 'root'
-        password: 'password'
         read:
           mode: :primary
         max_pool_size: 1
