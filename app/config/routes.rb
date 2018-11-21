@@ -1,6 +1,12 @@
 require 'sidekiq/web'
 Rails.application.routes.draw do
   
+  # top page
+  root 'webapp/static_pages#index'
+
+  # line login
+  get 'auth/:provider/callback', to: 'webapp/sessions#create'
+
   # linebot callback
   post '/line/callback_for_user', to: 'bot/line_webhook#callback_for_user'
   post '/line/callback_for_circle', to: 'bot/line_webhook#callback_for_circle'
@@ -16,8 +22,10 @@ Rails.application.routes.draw do
   # users
   get 'users/login_as_circle', to: 'webapp/users#login_as_circle'
   get 'users/login_as_user', to: 'webapp/users#login_as_user'
-  post 'users/login', to: 'webapp/users#login'
-  post 'users/logout', to: 'webapp/users#logout'
+  # post 'users/login', to: 'webapp/users#login'
+  
+  # sessions
+  get '/logout', to: 'webapp/sessions#destroy'
 
   # cricles
   get 'circles/new', to: 'webapp/circles#new'
