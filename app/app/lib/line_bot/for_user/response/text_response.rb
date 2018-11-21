@@ -15,7 +15,7 @@ class LineBot::ForUser::Response::TextResponse < LineBot::ForUser::Response::Bas
       case line_bot_event.type
       when Line::Bot::Event::MessageType::Text
         # テキストがtrigger_textだったら
-        case line_bot_event.message['text'] #REVIEW 配列で定義したらinclude的なものになる
+        case line_bot_event.message['text']
         when *@trigger_texts
           # runを実行
           run(line_bot_event)
@@ -31,5 +31,10 @@ class LineBot::ForUser::Response::TextResponse < LineBot::ForUser::Response::Bas
 
   def run(line_bot_event)
     # サブクラスで返信を送る処理をかく
+    # case line_bot_event.message['text']
+    # when "ほにゃらら"
+    #   messages = {}
+    # end
+    # LineBot::ForUser::Client.instance.reply_message(line_bot_event['replyToken'], messages)
   end
 end
