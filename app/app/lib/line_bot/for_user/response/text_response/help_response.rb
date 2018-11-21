@@ -20,6 +20,9 @@ class LineBot::ForUser::Response::TextResponse::HelpResponse < LineBot::ForUser:
       messages = to_frecent_questions_messages
     when @trigger_texts[3]
       messages = to_inquiry_messages
+      sending_user = User.find_by(line_user_id: line_bot_event['source']['userId'])
+      sending_user.update(flag_is_about_to_asking: true)
+      LineBot::ForUser::CancellFlagWorker.perform_in 10.seconds, "flag_is_about_to_asking", sending_user.line_user_id
     end
     LineBot::ForUser::Client.instance.reply_message(line_bot_event['replyToken'], messages)
   end
@@ -96,9 +99,17 @@ class LineBot::ForUser::Response::TextResponse::HelpResponse < LineBot::ForUser:
         text: "もしよくある質問に知りたい情報がなかったらお問い合わせから気軽に質問してね！\n僕を作った人が対応するよ！"
       }
     ]
+    return messages
   end
 
   def to_inquiry_messages
     #TODO: どんな仕様にしましょうかね。笑
+    messages = [
+      {
+        type: "text",
+        text: "お問い合わせありがとう！\n次に君が送る文章が僕を作った人にそのまま届くよ！\n1メッセージ分しか届かないから注意してね！"
+      }
+    ]
+    return messages
   end
 end
