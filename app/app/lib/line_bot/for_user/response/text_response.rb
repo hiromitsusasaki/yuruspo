@@ -18,7 +18,7 @@ class LineBot::ForUser::Response::TextResponse < LineBot::ForUser::Response::Bas
         case line_bot_event.message['text'] #REVIEW 配列で定義したらinclude的なものになる
         when *@trigger_texts
           # runを実行
-          run(line_bot_event.message['text'])
+          run(line_bot_event)
         end
       end
     end
@@ -29,7 +29,7 @@ class LineBot::ForUser::Response::TextResponse < LineBot::ForUser::Response::Bas
 
   private
 
-  def run(sended_text)
+  def run(line_bot_event)
     # サブクラスで返信を送る処理をかく
   end
 end
