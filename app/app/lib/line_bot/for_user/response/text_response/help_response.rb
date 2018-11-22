@@ -22,7 +22,7 @@ class LineBot::ForUser::Response::TextResponse::HelpResponse < LineBot::ForUser:
       messages = to_inquiry_messages
       sending_user = User.find_by(line_user_id: line_bot_event['source']['userId'])
       sending_user.update(flag_is_about_to_asking: true)
-      LineBot::ForUser::CancellFlagWorker.perform_in 10.seconds, "flag_is_about_to_asking", sending_user.line_user_id
+      LineBot::ForUser::CancellFlagWorker.perform_in 30.minutes, "flag_is_about_to_asking", sending_user.line_user_id
     end
     LineBot::ForUser::Client.instance.reply_message(line_bot_event['replyToken'], messages)
   end
@@ -107,7 +107,7 @@ class LineBot::ForUser::Response::TextResponse::HelpResponse < LineBot::ForUser:
     messages = [
       {
         type: "text",
-        text: "お問い合わせありがとう！\n次に君が送る文章が僕を作った人にそのまま届くよ！\n1メッセージ分しか届かないから注意してね！"
+        text: "お問い合わせありがとう！\n次に君が送る文章が僕を作った人にそのまま届くよ！\nメッセージは一つ分しか届かないから送りたい内容は一回で送ってね！"
       }
     ]
     return messages
