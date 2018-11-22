@@ -10,6 +10,7 @@ class LineBot::ForUser::Responder
     # responses.push(LineBot::ForUser::Response::EchoResponse.new)
     responses.push(LineBot::ForUser::Response::ImageResponse.new)
     responses.push(LineBot::ForUser::Response::TextResponse::HelpResponse.new)
+    responses.push(LineBot::ForUser::Response::FollowResponse.new)
     responses.push(LineBot::ForUser::Response::ErrorResponse.new)
     set_chain_of responses
     responses[0].send(@line_bot_event)
