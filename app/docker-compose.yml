@@ -52,6 +52,8 @@ services:
       - REDIS_URL=redis://redis:6379
 
   worker:
+    tty: true
+    stdin_open: true
     build: .
     environment:
       - YURUSPO_LINE_CHANNEL_FOR_USER_SECRET
