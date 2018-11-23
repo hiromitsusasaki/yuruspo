@@ -9,12 +9,14 @@ class LineBot::ForCircle::Responder
     responses = []
     # responses.push(LineBot::ForCircle::Response::EchoResponse.new)
     responses.push(LineBot::ForCircle::Response::ImageResponse.new)
-    responses.push(LineBot::ForCircle::Response::TextResponse::HelpResponse.new)
+    responses.push(LineBot::ForCircle::Response::FollowResponse.new)
+    # responses.push(LineBot::ForCircle::Response::TextResponse::HelpResponse.new)
     responses.push(LineBot::ForCircle::Response::ErrorResponse.new)
     set_chain_of responses
     responses[0].send(@line_bot_event)
   end
 
+  private
   # 一つ後ろのindexの中身をnextに指定
   def set_chain_of responses
     responses.each_with_index{|response, index|
