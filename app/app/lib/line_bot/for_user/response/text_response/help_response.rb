@@ -35,7 +35,7 @@ class LineBot::ForUser::Response::TextResponse::HelpResponse < LineBot::ForUser:
       },
       {
         type: 'imagemap',#TODO: 直す
-        baseUrl: "https://s3-ap-northeast-1.amazonaws.com/yurusupo-bot-public-images/for_user/help_menus",
+        baseUrl: Constants::S3::ForUser::HELP_MENUS_URL,
         altText: "スポーツの仕方が知りたいときは上半分を、よくある質問が知りたいときは左下を、お問い合わせがしたいときは右下を押してね",
         baseSize: {
           width: 375,
