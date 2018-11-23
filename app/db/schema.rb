@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181119111858) do
+ActiveRecord::Schema.define(version: 20181122163824) do
 
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "circle_id"
@@ -109,6 +109,15 @@ ActiveRecord::Schema.define(version: 20181119111858) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "inquiries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "user_id"
+    t.text "body"
+    t.boolean "is_responded"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_inquiries_on_user_id"
+  end
+
   create_table "messages", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "activity_id"
     t.text "body"
@@ -170,6 +179,9 @@ ActiveRecord::Schema.define(version: 20181119111858) do
     t.string "picture_url"
     t.string "line_user_id"
     t.bigint "owned_circle_id"
+    t.boolean "flag_is_about_to_asking"
+    t.boolean "is_following_bot_for_user"
+    t.boolean "is_following_bot_for_circle"
     t.index ["owned_circle_id"], name: "index_users_on_owned_circle_id"
   end
 
@@ -187,6 +199,7 @@ ActiveRecord::Schema.define(version: 20181119111858) do
   add_foreign_key "circles", "users", column: "owner_id"
   add_foreign_key "cities", "prefectures"
   add_foreign_key "contents", "event_types"
+  add_foreign_key "inquiries", "users"
   add_foreign_key "messages", "activities"
   add_foreign_key "place_contents", "contents"
   add_foreign_key "place_contents", "places"
