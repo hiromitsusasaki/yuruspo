@@ -27,6 +27,7 @@ class LineBot::ForUser::Response::FollowResponse < LineBot::ForUser::Response::B
     saved_user = User.find_or_create_by(line_user_id: line_bot_event["source"]["userId"])
     profile_params = LineBot::ForUser::Client.instance.get_profile_params(line_bot_event["source"]["userId"])
     saved_user.assign_attributes(profile_params)
+    saved_user.is_following_bot_for_user = true
     saved_user.save
   end
 end
