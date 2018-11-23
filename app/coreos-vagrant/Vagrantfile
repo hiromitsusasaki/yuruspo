@@ -29,7 +29,7 @@ $instance_name_prefix = "core"
 $enable_serial_logging = false
 $share_home = false
 $vm_gui = false
-$vm_memory = 1024
+$vm_memory = 2048
 $vm_cpus = 1
 $vb_cpuexecutioncap = 100
 $shared_folders = { '../' => '/yuruspo'}
