@@ -18,7 +18,7 @@ services:
       - mongodb-db:/data/db
     ports:
       - '27017:27017'
-    command: mongod --smallfiles  
+    command: mongod --smallfiles
   db:
     image: mysql:5.7
     environment:
@@ -57,7 +57,9 @@ services:
       - RAILS_ENV=development
       - REDIS_URL=redis://redis:6379
       - YURUSPO_HOST_NAME
-      
+    tty: true
+    stdin_open: true
+
   worker:
     build: .
     environment:
@@ -78,3 +80,5 @@ services:
       - redis
       - mongodb
     command: bundle exec sidekiq
+    tty: true
+    stdin_open: true
