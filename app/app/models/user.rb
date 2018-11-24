@@ -30,4 +30,8 @@ class User < ApplicationRecord
     self.update(is_following_bot_for_user: false)
   end
 
+  def did_unfollow_bot_for_circle
+    self.update(is_following_bot_for_circle: false)
+  end
+  
 end
