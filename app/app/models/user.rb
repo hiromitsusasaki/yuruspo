@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  
+
   has_many :user_areas
   has_many :areas, through: :user_areas
   has_many :applications
@@ -25,4 +25,9 @@ class User < ApplicationRecord
       p user
     end
   end
+
+  def did_unfollow_bot_for_user
+    self.update(is_following_bot_for_user: false)
+  end
+
 end
