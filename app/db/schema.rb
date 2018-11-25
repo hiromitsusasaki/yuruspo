@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181125155037) do
+ActiveRecord::Schema.define(version: 20181125155615) do
 
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "circle_id"
@@ -143,6 +143,19 @@ ActiveRecord::Schema.define(version: 20181125155037) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "search_queries", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "user_id"
+    t.bigint "content_id"
+    t.bigint "city_id"
+    t.date "date"
+    t.integer "sent_activity_count"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["city_id"], name: "index_search_queries_on_city_id"
+    t.index ["content_id"], name: "index_search_queries_on_content_id"
+    t.index ["user_id"], name: "index_search_queries_on_user_id"
+  end
+
   create_table "user_blocks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "user_id"
     t.bigint "circle_id"
@@ -186,6 +199,9 @@ ActiveRecord::Schema.define(version: 20181125155037) do
   add_foreign_key "place_contents", "contents"
   add_foreign_key "place_contents", "places"
   add_foreign_key "places", "cities"
+  add_foreign_key "search_queries", "cities"
+  add_foreign_key "search_queries", "contents"
+  add_foreign_key "search_queries", "users"
   add_foreign_key "user_blocks", "circles"
   add_foreign_key "user_blocks", "users"
   add_foreign_key "users", "circles", column: "owned_circle_id"
