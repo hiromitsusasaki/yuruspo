@@ -1,9 +1,7 @@
 class LineBot::ForUser::Response::InquiryReponse < LineBot::ForUser::Response::BaseResponse
   def send(line_bot_event)
-    puts User.find_by(line_user_id: line_bot_event["source"]["userId"]).flag_is_about_to_asking
     if User.find_by(line_user_id: line_bot_event["source"]["userId"]).flag_is_about_to_asking && line_bot_event["type"] == "message"
       # お問い合わせモードでメッセージが送られてきたら対応
-      puts("受け付けた")
       run(line_bot_event)
     else
       # そうでなければ次へ
