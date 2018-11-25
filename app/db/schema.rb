@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181122163824) do
+ActiveRecord::Schema.define(version: 20181125155037) do
 
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "circle_id"
@@ -46,14 +46,6 @@ ActiveRecord::Schema.define(version: 20181122163824) do
     t.integer "status", limit: 1, default: 0, null: false
     t.index ["activity_id"], name: "index_applications_on_activity_id"
     t.index ["user_id"], name: "index_applications_on_user_id"
-  end
-
-  create_table "areas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "name"
-    t.bigint "city_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["city_id"], name: "index_areas_on_city_id"
   end
 
   create_table "chats", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -139,25 +131,16 @@ ActiveRecord::Schema.define(version: 20181122163824) do
     t.string "name"
     t.string "tel"
     t.string "address"
-    t.bigint "area_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["area_id"], name: "index_places_on_area_id"
+    t.bigint "city_id"
+    t.index ["city_id"], name: "index_places_on_city_id"
   end
 
   create_table "prefectures", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "user_areas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.bigint "user_id"
-    t.bigint "area_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["area_id"], name: "index_user_areas_on_area_id"
-    t.index ["user_id"], name: "index_user_areas_on_user_id"
   end
 
   create_table "user_blocks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -191,7 +174,6 @@ ActiveRecord::Schema.define(version: 20181122163824) do
   add_foreign_key "activity_reviews", "users"
   add_foreign_key "applications", "activities"
   add_foreign_key "applications", "users"
-  add_foreign_key "areas", "cities"
   add_foreign_key "chats", "activities"
   add_foreign_key "chats", "applications"
   add_foreign_key "circle_contents", "circles"
@@ -203,9 +185,7 @@ ActiveRecord::Schema.define(version: 20181122163824) do
   add_foreign_key "messages", "activities"
   add_foreign_key "place_contents", "contents"
   add_foreign_key "place_contents", "places"
-  add_foreign_key "places", "areas"
-  add_foreign_key "user_areas", "areas"
-  add_foreign_key "user_areas", "users"
+  add_foreign_key "places", "cities"
   add_foreign_key "user_blocks", "circles"
   add_foreign_key "user_blocks", "users"
   add_foreign_key "users", "circles", column: "owned_circle_id"
