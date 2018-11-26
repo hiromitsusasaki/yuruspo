@@ -8,6 +8,7 @@ csv.each_with_index do |pref, i|
   p name = pref[0]
 
   Prefecture.seed do |s|
+    s.id = i - 1
     s.name = name
   end
 end

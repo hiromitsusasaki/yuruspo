@@ -10,6 +10,7 @@ csv.each_with_index do |city, i|
 
   prefecture = Prefecture.find_by(name: pref_name)
   City.seed do |c|
+    c.id = i - 1
     c.name = city_name
     c.prefecture = prefecture
   end
