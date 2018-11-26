@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  contents: one
+  city: one
+  date: 2018-11-25
+  sent_activity_count: 1
+
+two:
+  user: two
+  contents: two
+  city: two
+  date: 2018-11-25
+  sent_activity_count: 1
