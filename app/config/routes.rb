@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   post 'circles', to: 'webapp/circles#create'
   get 'circles/:cricle_id/edit', to: 'webapp/circles#edit'
   patch 'circles/:circle_id', to: 'webapp/circles#update'
+  get 'circles/:circle_id', to: 'webapp/circles#show'
 
   # activities
   get 'circles/:circle_id/activities/new', to: 'webapp/activities#new'
