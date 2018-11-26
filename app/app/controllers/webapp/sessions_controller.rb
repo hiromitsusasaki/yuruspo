@@ -8,12 +8,17 @@ class Webapp::SessionsController < ApplicationController
     when 'user' then
       # userでログインした場合の処理
       p 'login as user.'
+      redirect_to root_path
     when 'circle' then
-      # circleでログインした場合の処理
       p 'login as circle.'
+      if user.has_circle
+        # サインイン初期登録の場合
+        redirect_to :controller => 'circles', :action => 'new'
+      else
+        #　ログイン（登録済み）の場合
+        redirect_to :controller => 'circles', :action => 'show', :circle_id => user.owned_circle.id
+      end
     end
-    
-    redirect_to root_path
   end
 
   def destroy

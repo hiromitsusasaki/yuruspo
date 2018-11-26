@@ -16,11 +16,9 @@ class User < ApplicationRecord
     picture_url = auth[:info][:image]
 
     self.find_or_create_by(provider: provider, uid: uid) do |user|
-      p user
       user.display_name = display_name
       user.status_message = status_message
       user.picture_url = picture_url
-      p user
     end
   end
 
@@ -30,6 +28,10 @@ class User < ApplicationRecord
 
   def did_unfollow_bot_for_circle
     self.update(is_following_bot_for_circle: false)
+  end
+
+  def has_circle
+    owned_circle.nil?
   end
 
 end

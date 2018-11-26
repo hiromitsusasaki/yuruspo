@@ -15,6 +15,19 @@
 @import "bootstrap";
 @import "jquery.sidr.light.css";
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: 100%;
+}
+
+html {
+  font-size: 100%;
+}
+
 body {
   width: 100%;
   position: relative;
@@ -37,4 +50,12 @@ body {
 
 .blue {
   fill: #1587CA;
+}
+
+h1 {
+  font-weight: bold
+}
+
+h2 {
+  font-weight: bolder
 }
