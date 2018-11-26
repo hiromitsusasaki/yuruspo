@@ -2,26 +2,14 @@
 
 one:
   user: one
-<<<<<<< HEAD
   contents: one
   city: one
   date: 2018-11-25
-=======
-  sport: MyString
-  city: MyString
-  dates: MyString
->>>>>>> save tmp (後でrebaseでまとめる)
   sent_activity_count: 1
 
 two:
   user: two
-<<<<<<< HEAD
   contents: two
   city: two
   date: 2018-11-25
-=======
-  sport: MyString
-  city: MyString
-  dates: MyString
->>>>>>> save tmp (後でrebaseでまとめる)
   sent_activity_count: 1
