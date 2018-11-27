@@ -40,8 +40,10 @@ body {
   max-width: 400px;
   margin: 0 auto;
   padding: 0;
-  height: 100vh;
+  height: 100％;
+  min-height: 100vh;
   box-shadow: 2px 2px 4px gray;
+  padding-bottom: 10px;
 }
 
 .header-nav {
