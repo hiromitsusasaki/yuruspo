@@ -1,5 +1,9 @@
-<% if logged_in? %>
-<%= link_to 'ログアウト', logout_path %>
-<% else %>
-<%= link_to 'Lineでログイン', 'auth/line' %>
+<% if !logged_in? %>
+<div class="text-center" style="margin-top: 104px;">
+<div>
+<%= link_to 'ユーザーとしてログイン', 'users/login_as_user' %>
+</div>
+<div class="mt-3">
+<%= link_to 'サークルとしてログイン', 'users/login_as_circle' %>
+</div>
 <% end %>

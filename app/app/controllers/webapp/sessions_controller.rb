@@ -3,7 +3,6 @@ class Webapp::SessionsController < ApplicationController
     user = User.find_or_create_from_auth(request.env['omniauth.auth'])
     session[:user_id] = user.id
     login_as = session[:login_as] 
-    session.delete(:login_from)
     case login_as 
     when 'user' then
       # userでログインした場合の処理
@@ -22,6 +21,7 @@ class Webapp::SessionsController < ApplicationController
   end
 
   def destroy
+
     reset_session
     # TODO: 
     redirect_to root_path
