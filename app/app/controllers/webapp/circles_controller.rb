@@ -7,7 +7,6 @@ class Webapp::CirclesController < ApplicationController
   end
 
   def create
-    p params
     circle = Circle.new(circle_params)
     circle.owner = current_user
     circle.save
@@ -18,6 +17,10 @@ class Webapp::CirclesController < ApplicationController
       circle_content.save
     end
     redirect_to :action => 'show', :circle_id => circle.id
+  end
+
+  def show
+    @circle = Circle.find(params[:circle_id])
   end
 
   private
