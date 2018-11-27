@@ -1,13 +1,13 @@
 class LineBot::ForUser::Response::UnfollowResponse < LineBot::ForUser::Response::BaseResponse
-  def send(line_bot_event)
 
-    case line_bot_event
-    when Line::Bot::Event::Unfollow
-      run(line_bot_event)
+  private
+
+  def is_responsible(line_bot_event)
+    if line_bot_event["type"] == "unfollow"
+      return true
+    else
+      return false
     end
-    return false unless @next
-
-    @next.send(line_bot_event)
   end
 
   def run(line_bot_event)

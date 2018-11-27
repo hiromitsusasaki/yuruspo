@@ -7,28 +7,23 @@ class LineBot::ForUser::Response::TextResponse < LineBot::ForUser::Response::Bas
     @trigger_texts = []#["反応するべき文字列"] とサブクラスで定義する
   end
 
-  def send(line_bot_event)
-    # メッセージイベントで
+  private
+
+  def is_responsible(line_bot_event)
     case line_bot_event
     when Line::Bot::Event::Message
-      # メッセージがテキストで
       case line_bot_event.type
       when Line::Bot::Event::MessageType::Text
-        # テキストがtrigger_textだったら
+        # メッセージがテキストで
         case line_bot_event.message['text']
+          # テキストがtrigger_textだったら
         when *@trigger_texts
-          # runを実行
-          run(line_bot_event)
           return true
         end
       end
+      return false
     end
-    return false unless @next
-
-    @next.send(line_bot_event)
   end
-
-  private
 
   def run(line_bot_event)
     # サブクラスで返信を送る処理をかく

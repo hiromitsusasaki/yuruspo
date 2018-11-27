@@ -1,15 +1,14 @@
 class LineBot::ForUser::Response::FollowResponse < LineBot::ForUser::Response::BaseResponse
-  def send(line_bot_event)
-    case line_bot_event
-    when Line::Bot::Event::Follow
-      run(line_bot_event)
-    end
-    return false unless @next
-
-    @next.send(line_bot_event)
-  end
 
   private
+
+  def is_responsible(line_bot_event)
+    if line_bot_event["type"] == "follow"
+      return true
+    else
+      return false
+    end
+  end
 
   def run(line_bot_event)
     messages = [

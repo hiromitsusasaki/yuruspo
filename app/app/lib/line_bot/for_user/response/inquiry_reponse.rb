@@ -1,16 +1,15 @@
 class LineBot::ForUser::Response::InquiryReponse < LineBot::ForUser::Response::BaseResponse
-  def send(line_bot_event)
-    if User.find_by(line_user_id: line_bot_event["source"]["userId"]).flag_is_about_to_asking && line_bot_event["type"] == "message"
-      # お問い合わせモードでメッセージが送られてきたら対応
-      run(line_bot_event)
-    else
-      # そうでなければ次へ
-      return false unless @next
-      @next.send(line_bot_event)
-    end
-  end
 
   private
+
+  def is_responsible(line_bot_event)
+    # お問い合わせモードでメッセージが送られてきたら対応
+    if User.find_by(line_user_id: line_bot_event["source"]["userId"]).flag_is_about_to_asking && line_bot_event["type"] == "message"
+      return true
+    else
+      return false
+    end
+  end
 
   def run(line_bot_event)
     if line_bot_event["message"]["type"] == "text"
