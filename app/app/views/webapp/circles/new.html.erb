@@ -7,7 +7,7 @@
   <%= label_tag 'circle[name]', 'サークル名' %>
   </div>
   <div>
-  <%= text_field_tag 'cirlcle[name]', '', :class => 'form-control' %>
+  <%= text_field_tag 'circle[name]', '', :class => 'form-control' %>
   </div>
   <div class="mt-3">
   <%= label_tag 'contents', '競技' %>
@@ -22,8 +22,8 @@
       <div class=col>
     <% end %>
     <div>
-    <%= check_box_tag 'content[' + index.to_s  + ']', index, false, :class => 'form-check-input' %>
-    <%= label_tag content, content, :class => 'form-check-label' %>
+    <%= check_box_tag 'content_ids[]', content.id, false, :id => 'content_checkbox_' + content.id.to_s, :class => 'form-check-input' %>
+    <%= label_tag 'content_checkbox_' + content.id.to_s, content.name, :class => 'form-check-label' %>
     </div>
   <% end %>
   </div>
@@ -34,6 +34,12 @@
   </div>
   <div>
     <%= text_area_tag 'circle[introduction]', '', :class => 'form-control', :rows => 5 %>
+  </div>
+  <div class="mt-3">
+    <%= label_tag 'circle[default_auto_reply_comment]', 'デフォルトのリプライ文' %>
+  </div>
+  <div>
+    <%= text_area_tag 'circle[default_auto_reply_comment]', '', :class => 'form-control', :rows => 5 %>
   </div>
   <div class="mt-3">
     <%= image_tag 'https://via.placeholder.com/370x250' %>
