@@ -1,6 +1,42 @@
 <div class="mt-3">
   <h2>サークル情報登録</h2>
 </div>
-<%= form_tag('/circles') do %>
-  
+<div class="form-group mt-3">
+<%= form_tag '/circles' do %>
+  <div>
+  <%= label_tag 'circle[name]', 'サークル名' %>
+  </div>
+  <div>
+  <%= text_field_tag 'cirlcle[name]', '', :class => 'form-control' %>
+  </div>
+  <div class="mt-3">
+  <%= label_tag 'contents', '競技' %>
+  </div>
+  <div class="form-check">
+  <div class="row">
+  <% @contents.each_with_index do |content, index| %>
+    <% if index == 0 %>
+      <div class=col>
+    <% elsif @contents.size / 2 == index - 1 %>
+      </div>
+      <div class=col>
+    <% end %>
+    <div>
+    <%= check_box_tag 'content[' + index.to_s  + ']', index, false, :class => 'form-check-input' %>
+    <%= label_tag content, content, :class => 'form-check-label' %>
+    </div>
+  <% end %>
+  </div>
+  </div>
+  </div>
+  <div class="mt-3">
+    <%= label_tag 'circle[introduction]', '紹介文' %>
+  </div>
+  <div>
+    <%= text_area_tag 'circle[introduction]', '', :class => 'form-control', :rows => 5 %>
+  </div>
+  <div class="mt-3">
+    <%= button_tag '送信', :class => 'btn btn-primary', :style => 'width: 100%;' %>
+  </div>
 <% end %>
+</div>
