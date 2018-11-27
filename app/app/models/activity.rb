@@ -6,4 +6,7 @@ class Activity < ApplicationRecord
   has_many :chats
   has_many :activity_reviews
   has_many :messages
+
+  delegate :content, to: :place_content
+  delegate :place, to: :place_content
 end
