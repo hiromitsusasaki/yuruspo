@@ -1,0 +1,76 @@
+<div class="mt-3">
+  <h3>活動予定</h3>
+  <hr />
+  <ul class="list-unstyled">
+  <% @circle.activities.each do |activity| %>
+    <li><%= link_to "#{l(activity.date, format: :short)} #{activity.content.name} @#{activity.place.name}", "/circles/#{@circle.id}/activities/#{activity.id}"  %></li>
+  <% end %>
+  </ul>
+  <hr />
+</div>
+<%= form_tag "/circles/#{@circle.id}/activities/" do %>
+<div class="mt-4">
+  <h2>活動予定追加</h2>
+    <div class="form-group">
+      <%= label_tag 'content', '競技' %>
+      <%= select_tag 'content', options_from_collection_for_select(@circle.contents, :id, :name), class: 'form-control' %>
+    </div>
+</div>
+<div class="mt-3">
+  <h3>日程</h3>
+  <div class="row">
+    <div class="col form-inline">
+      <%= select_tag 'date[month]', nil, class: 'form-control mr-2', style: "width: 85%;" %>
+      <%= label_tag 'data_month', '月'  %>
+    </div>
+    <div class="col form-inline">
+      <%= select_tag 'date[date]', nil,  class: 'form-control mr-2', style: "width: 85%;" %>
+      <%= label_tag 'data_date', '日', class: "float-right"  %>
+    </div>
+  </div>
+</div>
+<div class="mt-3">
+  <h3>時間</h3>
+  <div class="row">
+    <div class="col form-inline">
+      <%= select_tag 'start_time[hour]', nil, class: 'form-control mr-2', style: "width: 85%;" %>
+      <%= label_tag 'start_time_hour', '時'  %>
+    </div>
+    <div class="col form-inline">
+      <%= select_tag 'start_time[minute]', nil,  class: 'form-control mr-2', style: "width: 85%;" %>
+      <%= label_tag 'start_time_minute', '分', class: "float-right"  %>
+    </div>
+  </div>
+  <div> 
+  <div style="width: 100%; text-align:center">↕</div>
+  <div class="row mt-2">
+    <div class="col form-inline">
+      <%= select_tag 'end_time[hour]', nil, class: 'form-control mr-2', style: "width: 85%;" %>
+      <%= label_tag 'end_time_hour', '時'  %>
+    </div>
+    <div class="col form-inline">
+      <%= select_tag 'end_time[minute]', nil,  class: 'form-control mr-2', style: "width: 85%;" %>
+      <%= label_tag 'end_time_minute', '分', class: "float-right"  %>
+    </div>
+  </div>
+</div>
+<div class="mt-3">
+  <div class="form-group">
+    <%= label_tag 'content', '活動場所' %>
+    <%= text_field_tag 'activity[address]', nil, class: 'form-control' %>
+  </div>
+</div>
+<div class="mt-3">
+  <div class="form-group">
+    <%= label_tag 'content', '最大募集人数' %>
+    <div class="form-inline">
+      <%= text_field_tag 'activity[address]', nil, class: 'form-control mr-2', style: 'width: 90%;' %>人
+    </div>
+  </div>
+</div>
+<div class="mt-5">
+  <%= button_tag '追加', :class => 'btn btn-primary', :style => 'width: 100%;' %>
+</div>
+<% end %>
+<hr />
+<%= link_to 'サークルページへ戻る', "/circles/#{@circle.id}", class: 'btn btn-primary', style: 'width: 100%;' %>
