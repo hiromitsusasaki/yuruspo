@@ -14,9 +14,6 @@ class Webapp::ActivitiesController < ApplicationController
     activity = Activity.new(activity_params)
     activity.circle = circle
     place = Place.find_or_initialize_by(place_params)
-    # place = Place.find_or_initialize_by(address: place_params[:address])
-    # place.name = place_params[:name]
-    # place.tel = place_params[:tel]
     place.city = Prefecture.find_by(name: prefecture_params[:name]).cities.find_by(name: city_params[:name])
     place.save
     content = Content.find(content_params[:id])
