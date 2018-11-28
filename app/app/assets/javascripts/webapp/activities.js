@@ -5,7 +5,7 @@ var autocomplete;
 
 function initAutocomplete() {
   autocomplete = new google.maps.places.Autocomplete(
-    (document.getElementById('activity_address')), {
+    (document.getElementById('place_address')), {
       type: ['geocode']
     }
   )
