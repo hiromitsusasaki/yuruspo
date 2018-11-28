@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181125155615) do
+ActiveRecord::Schema.define(version: 20181128144829) do
 
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "circle_id"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20181125155615) do
     t.time "end_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "should_send_notify"
     t.index ["circle_id"], name: "index_activities_on_circle_id"
     t.index ["place_content_id"], name: "index_activities_on_place_content_id"
   end
