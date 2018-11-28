@@ -1,5 +1,41 @@
 <div class="row" style="margin-top: 24px;">
   <div class="col">
-    <p>このページはテストページです</p>
+    <p>UIのテストページ</p>
+    <div class="mt-5">
+    <h2>場所入力</h2>
+    <%= form_tag do %>
+    <%= text_field_tag 'place[address]', '', :class => 'form-control' %>
+    <% end %>
+    </div>
   </div>
 </div>
+<script>
+  var placeSearch, autocomplete;
+  function initAutocomplete() {
+    autocomplete = new google.maps.places.Autocomplete(
+      (document.getElementById('place_address')),
+      {type: ['geocode']}
+    )
+    autocomplete.addListener('place_changed', getPlace);
+  }
+  function getPlace() {
+    var place = autocomplete.getPlace();
+    console.log(place);
+  }
+  function geolocate() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        var geolocation = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+        var circle = new google.maps.Circle({
+          center: geolocation,
+          radius: position.coords.accuracy
+        });
+      })
+    }
+  }
+
+</script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC8CgYxCvTNQnH9YLmEPNLFDB5RU2VXpr4&libraries=places&callback=initAutocomplete" async defer></script>
