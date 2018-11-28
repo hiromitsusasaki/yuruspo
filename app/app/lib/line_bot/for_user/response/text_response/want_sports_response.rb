@@ -10,8 +10,6 @@ class LineBot::ForUser::Response::TextResponse::WantSportsResponse < LineBot::Fo
   def run(line_bot_event)
     SearchQuery.create_with_line_user_id(line_bot_event["source"]["userId"])
     messages = reply_messages
-    puts messages
-    puts "あああ"
     LineBot::ForUser::Client.instance.reply_message(line_bot_event['replyToken'], messages)
     # コメントアウトは将来的に処理を分けるかもって感じのもの。データが集まって同じ設定で検索する人が多いことがわかったら実装でいい気がした。
     # if SearchQuery.where_line_user_id(line_bot_event["source"]["userId"]).empty?
