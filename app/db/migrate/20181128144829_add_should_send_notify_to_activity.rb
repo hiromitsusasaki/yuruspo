@@ -1,5 +1,5 @@
 class AddShouldSendNotifyToActivity < ActiveRecord::Migration[5.1]
   def change
-    add_column :activities, :should_send_notify, :boolean
+    add_column :activities, :should_send_notify, :boolean, default: false
   end
 end
