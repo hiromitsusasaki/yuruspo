@@ -5,7 +5,6 @@ class LineBot::ForUser::Response::DateResponse < LineBot::ForUser::Response::Bas
   def is_responsible(line_bot_event)
     return false unless line_bot_event["type"] == "message"
     return false unless line_bot_event["message"]["type"] == "text"
-    return false unless
 
     rep = %r(([1-9]|1[0-2])/([1-9]|[12][0-9]|3[01])\(\p{Han}\))
     return true if rep.match(line_bot_event["message"]["text"])
