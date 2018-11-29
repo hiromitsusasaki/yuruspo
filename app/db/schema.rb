@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20181127074605) do
     t.time "end_time"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "should_send_notify", default: false
     t.index ["circle_id"], name: "index_activities_on_circle_id"
     t.index ["place_content_id"], name: "index_activities_on_place_content_id"
   end

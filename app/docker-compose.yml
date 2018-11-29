@@ -57,6 +57,7 @@ services:
       - RAILS_ENV=development
       - REDIS_URL=redis://redis:6379
       - YURUSPO_HOST_NAME
+      - GOOGLE_PLACE_API_KEY
     tty: true
     stdin_open: true
 

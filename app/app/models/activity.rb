@@ -35,4 +35,31 @@ class Activity < ApplicationRecord
     Activity.create(circle: Circle.find(1), place_content: pc)
   end
 
+
+  def the_day_before()
+    messages = remind_messages
+    approved_users().each{|user|
+      LineBot::ForUser::PushWorker.perform_async(user.line_user_id, messages)
+    }
+  end
+
+  def approved_users
+    users = []
+    self.applications.where(status: :approved).each{|application|
+      users.push application.user
+    }
+    return users
+  end
+
+  private
+
+  def remind_messages
+    messages = [
+      {
+        type: "text",
+        text: "明日はこの活動に参加予定だよ！\n忘れないようにね！\nhttps://yurusupo.com/activities/#{self.id}"
+      }
+    ]
+  end
+
 end
