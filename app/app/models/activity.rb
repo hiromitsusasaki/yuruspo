@@ -9,7 +9,7 @@ class Activity < ApplicationRecord
 
   delegate :content, to: :place_content
   delegate :place, to: :place_content
-  
+
   def self.where_query(search_query)
     # SQL文を条件に応じて作成
     where_str = ""
@@ -43,6 +43,17 @@ class Activity < ApplicationRecord
     }
   end
 
+  def after_activity_at21_oclock()
+    # ユーザーへレビューリクエストを送信
+    messages_to_user = request_review_messages_to_user
+    approved_users().each{|user|
+      LineBot::ForUser::PushWorker.perform_async(user.line_user_id, messages_to_user)
+    }
+    # サークルへレビューリクエストを送信
+    messages_to_circle = request_review_messages_to_circle
+    LineBot::ForCircle::PushWorker.perform_async(self.circle.owner.line_user_id, messages_to_circle)
+  end
+
   def approved_users
     users = []
     self.applications.where(status: :approved).each{|application|
@@ -62,4 +73,22 @@ class Activity < ApplicationRecord
     ]
   end
 
+
+  def request_review_messages_to_user
+    messages = [
+      {
+        type: "text",
+        text: "今日の活動はどうだったかな？\n活動について感想を教えてね！\nhttps://yurusupo.com/activities/#{self.id}/review/new"
+      }
+    ]
+  end
+
+  def request_review_messages_to_circle
+    messages = [
+      {
+        type: "text",
+        text: "今日の活動はどうでしたか？\n次回参加して欲しくない参加者がいた場合はこちらからブロックができます。\nhttps://yurusupo.com/activities/#{self.id}/bolock"
+      }
+    ]
+  end
 end
