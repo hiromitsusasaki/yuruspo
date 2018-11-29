@@ -2,3 +2,20 @@
   Place all the styles related to the matching controller here.
   They will automatically be included in application.css.
 */
+
+table.table.show th {
+  width: 20%;
+}
+
+table.table.show td {
+  width: 80%;
+}
+
+svg.icon_content {
+  width: 120px !important;
+  height: 120px !important;
+}
+
+svg.icon_content .st0 {
+  fill: #1587CA !important;
+}
