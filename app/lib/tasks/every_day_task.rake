@@ -15,4 +15,11 @@ namespace :every_day_task do
       activity.after_activity()
     }
   end
+
+  desc "以前来てくれた人へ活動日の告知をする"
+  task send_notification_to_previous_user: :environment do
+    Activity.where(should_send_notify: true).each{|activity|
+      activity.send_notification_to_previous_user()
+    }
+  end
 end

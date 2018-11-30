@@ -28,3 +28,9 @@ Activity.seed do |s|
   s.start_time = Time.zone.local(tomorrow.year, tomorrow.mon, tomorrow.mday, 10, 0, 0)
   s.end_time = Time.zone.local(tomorrow.year, tomorrow.mon, tomorrow.mday, 13, 0, 0)
 end
+
+Application.seed do |s|
+  s.user = user
+  s.activity = Activity.find(2)
+  s.status = :approved
+end

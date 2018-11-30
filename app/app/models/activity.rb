@@ -6,6 +6,7 @@ class Activity < ApplicationRecord
   has_many :chats
   has_many :activity_reviews
   has_many :messages
+  has_many :users, through: :applications
 
   delegate :content, to: :place_content
   delegate :place, to: :place_content
@@ -62,6 +63,16 @@ class Activity < ApplicationRecord
     return users
   end
 
+
+
+  def send_notification_to_previous_user
+    return false unless self.should_send_notify #ガード文
+    messages = messages_for_previous_user
+    self.circle.previous_users.each{ |user|
+      LineBot::ForCircle::PushWorker.perform_async(user.line_user_id, messages)
+    }
+    self.update(should_send_notify: false)
+  end
   private
 
   def remind_messages
@@ -90,5 +101,18 @@ class Activity < ApplicationRecord
         text: "今日の活動はどうでしたか？\n次回参加して欲しくない参加者がいた場合はこちらからブロックができます。\nhttps://yurusupo.com/activities/#{self.id}/bolock"
       }
     ]
+  end
+
+  def messages_for_previous_user
+    wds = ["日", "月", "火", "水", "木", "金", "土"]
+    messages = [
+      {
+        type: "text",
+        text: "このまえ参加した#{self.circle.name} が#{self.date.strftime("%-m/%-d")}(#{wds[self.date.wday]})に#{self.place_content.content.name}の企画をしているよ！\n気軽に参加してね！"
+      }
+    ]
+    activity_message = LineBot::ForUser::MessageMaker.suggest_activity_message(self)
+    activity_message[:template][:actions].delete_at(1) #詳しく見るボタンを消している
+    messages.push(activity_message)
   end
 end
