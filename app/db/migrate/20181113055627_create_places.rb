@@ -4,7 +4,7 @@ class CreatePlaces < ActiveRecord::Migration[5.1]
       t.string :name
       t.string :tel
       t.string :address
-      t.belongs_to :area, foreign_key: true
+      t.belongs_to :city, foreign_key: true
 
       t.timestamps
     end
