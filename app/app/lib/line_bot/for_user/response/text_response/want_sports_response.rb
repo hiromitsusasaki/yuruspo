@@ -62,8 +62,8 @@ class LineBot::ForUser::Response::TextResponse::WantSportsResponse < LineBot::Fo
         baseUrl: Constants::S3::ForUser::SPORTS_KIND_IMAGE_URL,
         altText: "画像を読み込んでね",
         baseSize: {
-          width: 375,
-          height: 254
+          width: 1040,
+          height: 704
         },
         actions: [
           {
