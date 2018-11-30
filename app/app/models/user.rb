@@ -31,7 +31,7 @@ class User < ApplicationRecord
   end
 
   def has_circle
-    owned_circle.nil?
+    !owned_circle.nil?
   end
 
 end
