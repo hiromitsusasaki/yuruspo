@@ -38,8 +38,8 @@ class LineBot::ForUser::Response::TextResponse::HelpResponse < LineBot::ForUser:
         baseUrl: Constants::S3::ForUser::HELP_MENUS_URL,
         altText: "スポーツの仕方が知りたいときは上半分を、よくある質問が知りたいときは左下を、お問い合わせがしたいときは右下を押してね",
         baseSize: {
-          width: 375,
-          height: 254
+          width: 1040,
+          height: 704
         },
         actions: [
           {
