@@ -19,3 +19,7 @@ svg.icon_content {
 svg.icon_content .st0 {
   fill: #1587CA !important;
 }
+
+div.chat.recently {
+  color: gray;
+}
