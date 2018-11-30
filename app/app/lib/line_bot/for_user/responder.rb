@@ -10,6 +10,7 @@ class LineBot::ForUser::Responder
     # responses.push(LineBot::ForUser::Response::EchoResponse.new)
     responses.push(LineBot::ForUser::Response::ImageResponse.new)
     responses.push(LineBot::ForUser::Response::TextResponse::HelpResponse.new)
+    responses.push(LineBot::ForUser::Response::TextResponse::CheckScheduleResponse.new)
     responses.push(LineBot::ForUser::Response::ContentsNameResponse.new)
     responses.push(LineBot::ForUser::Response::CitiesNameResponse.new)
     responses.push(LineBot::ForUser::Response::DateResponse.new)
