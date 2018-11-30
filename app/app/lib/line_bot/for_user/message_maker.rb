@@ -62,4 +62,50 @@ class LineBot::ForUser::MessageMaker
     }
     return message
   end
+
+
+  def self.check_schedule_messages(activities)
+    wds = ["日", "月", "火", "水", "木", "金", "土"]
+    if activities.present?
+      this_or_these = activities.count == 1 ? "この":"これらの"
+      messages = [
+        {
+          type: "text",
+          text: "おっけー！\n今のところ参加予定なのは#{this_or_these}活動だよ！"
+        }
+      ]
+      carousel_message = {
+        type: "template",
+        altText: "this is a carousel template",
+        template: {
+          type: "carousel",
+          actions: [],
+          columns: []
+        }
+      }
+      activities.each{ |activity|
+        column = {
+          title: "#{activity.date.strftime("%-m/%-d(#{wds[activity.date.wday]})")} #{activity.place_content.content.name}",
+          text: "場所: #{activity.place_content.place.name}",
+          actions: [
+            {
+              type: "uri",
+              label: "詳しく見る",
+              uri: "https://www.flopdesign.com/freefont/flopdesignfont.html"#TODO: リンク
+            }
+          ],
+          thumbnailImageUrl: "https://illustimage.com/photo/117.png",#TODO:リンク
+        }
+        carousel_message[:template][:columns].push(column)
+      }
+      messages.push(carousel_message)
+    else
+      messages = [
+        {
+          type: "text",
+          text: "今のところ予定はないよ！\nメニューの「スポーツしたい！」からスポーツに参加しよう！"
+        }
+      ]
+    end
+  end
 end
