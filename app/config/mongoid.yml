@@ -166,4 +166,4 @@ test:
 production:
   clients:
     default:
-      uri: <%= EVN['MONGODB_URI'] %>
+      uri: <%= ENV['MONGODB_URI'] %>
