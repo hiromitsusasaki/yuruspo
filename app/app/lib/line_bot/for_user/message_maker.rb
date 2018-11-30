@@ -1,5 +1,5 @@
-class LineBot::ForUser::MessageMaker < Line::Bot::Client
-
+class LineBot::ForUser::MessageMaker
+  
   def self.suggest_dates_carousel_message(query)
     carousel_message = {
       type: "template",
