@@ -10,6 +10,8 @@ class Webapp::CirclesController < ApplicationController
     circle = Circle.new(circle_params)
     circle.owner = current_user
     circle.save
+    current_user.owned_circle = circle
+    current_user.save
     params[:content_ids].each do |content_id|
       circle_content = CircleContent.new
       circle_content.circle = circle
