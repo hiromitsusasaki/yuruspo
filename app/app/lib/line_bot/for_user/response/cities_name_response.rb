@@ -6,9 +6,9 @@ class LineBot::ForUser::Response::CitiesNameResponse < LineBot::ForUser::Respons
 
     return false unless line_bot_event["type"] == "message"
     return false unless line_bot_event["message"]["type"] == "text"
-    return false unless SearchQuery.not_completed_query(line_bot_event["source"]["userId"]).present?
-    return true if City.where_like(line_bot_event["message"]["text"]).present?
-    
+    return false unless City.where_like(line_bot_event["message"]["text"]).present?
+    return true if SearchQuery.not_completed_query(line_bot_event["source"]["userId"]).present?
+
     return false
   end
 

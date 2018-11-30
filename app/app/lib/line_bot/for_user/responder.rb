@@ -8,6 +8,8 @@ class LineBot::ForUser::Responder
   def send
     responses = []
     # responses.push(LineBot::ForUser::Response::EchoResponse.new)
+    responses.push(LineBot::ForUser::Response::FollowResponse.new)
+    responses.push(LineBot::ForUser::Response::UnfollowResponse.new)
     responses.push(LineBot::ForUser::Response::ImageResponse.new)
     responses.push(LineBot::ForUser::Response::TextResponse::HelpResponse.new)
     responses.push(LineBot::ForUser::Response::TextResponse::CheckScheduleResponse.new)
@@ -16,8 +18,6 @@ class LineBot::ForUser::Responder
     responses.push(LineBot::ForUser::Response::DateResponse.new)
     responses.push(LineBot::ForUser::Response::TextResponse::WantSportsResponse.new)
     responses.push(LineBot::ForUser::Response::OtherActivityResponse.new)
-    responses.push(LineBot::ForUser::Response::FollowResponse.new)
-    responses.push(LineBot::ForUser::Response::UnfollowResponse.new)
     responses.push(LineBot::ForUser::Response::InquiryReponse.new)
     responses.push(LineBot::ForUser::Response::ErrorResponse.new)
     set_chain_of responses
