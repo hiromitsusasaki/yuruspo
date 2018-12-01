@@ -42,7 +42,10 @@ Rails.application.routes.draw do
   delete 'circles/:circle_id/activities/:activity_id', to: 'webapp/activities#destroy'
   get 'circles/:circle_id/activities/:activity_id', to: 'webapp/activities#show'
   
-  # message
+  # messages
+  post 'circles/:circle_id/activities/:activity_id/messages', to: 'webapp/messages#create'
+
+  # user_blocks
   get 'circles/:circle_id/activities/:activity_id/user_blocks/new', to: 'webapp/user_blocks#new'
   post 'circles/:circle_id/activities/:activity_id/user_blocks', to: 'webapp/user_blocks#create'
 
