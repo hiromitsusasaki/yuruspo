@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20181201004238) do
-=======
-ActiveRecord::Schema.define(version: 20181129064354) do
->>>>>>> ChatモデルとActivity/Applicationモデルのリレーションの仕様を見直し、DBスキーマ、モデルの設定を変更 #16
 
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "circle_id"
