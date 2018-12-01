@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181128144829) do
+ActiveRecord::Schema.define(version: 20181201021736) do
 
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "circle_id"
@@ -50,13 +50,12 @@ ActiveRecord::Schema.define(version: 20181128144829) do
   end
 
   create_table "chats", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.bigint "activity_id"
     t.bigint "application_id"
     t.integer "speaker", limit: 1, default: 0, null: false
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["activity_id"], name: "index_chats_on_activity_id"
+    t.boolean "is_already_read", default: false
     t.index ["application_id"], name: "index_chats_on_application_id"
   end
 
@@ -169,7 +168,6 @@ ActiveRecord::Schema.define(version: 20181128144829) do
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "uid"
     t.string "provider"
     t.string "display_name"
     t.text "status_message"
@@ -188,7 +186,6 @@ ActiveRecord::Schema.define(version: 20181128144829) do
   add_foreign_key "activity_reviews", "users"
   add_foreign_key "applications", "activities"
   add_foreign_key "applications", "users"
-  add_foreign_key "chats", "activities"
   add_foreign_key "chats", "applications"
   add_foreign_key "circle_contents", "circles"
   add_foreign_key "circle_contents", "contents"
