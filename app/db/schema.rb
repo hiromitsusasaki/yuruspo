@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181201004238) do
+ActiveRecord::Schema.define(version: 20181201021736) do
 
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "circle_id"
@@ -55,6 +55,7 @@ ActiveRecord::Schema.define(version: 20181201004238) do
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "is_already_read", default: false
     t.index ["application_id"], name: "index_chats_on_application_id"
   end
 
