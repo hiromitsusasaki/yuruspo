@@ -50,11 +50,15 @@
         <tr>
           <div class="row">
             <div class="col-2">
+<<<<<<< HEAD
               <% if application.user.picture_url.nil? %>
                 <%= image_tag "icon_profile_no_image", size: "50x50", class: 'rounded-circle' %>
               <% else %>
                 <%= image_tag application.user.picture_url, size: "50x50", class: 'rounded-circle' %>
               <% end %>
+=======
+              <%= image_tag "icon_profile_no_image", size: "50x50" %>
+>>>>>>> 3b57238a6552a1dba3f6946457d89077fc4e5047
             </div>
             <div class="col-8">
               <div><%= application.user.display_name %></div>
@@ -63,6 +67,16 @@
             <div class="col-2">
               <span class="badge badge-success">1</span>
             </div>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+=======
+          <div>
+
+>>>>>>> 1a54667bc83100a2d5506e42520d17633f2e8432
+>>>>>>> 03c56fe6f7cce7297dad430695f2276d020266c3
+>>>>>>> 3b57238a6552a1dba3f6946457d89077fc4e5047
           </div>
         </tr>
       <% end %>
