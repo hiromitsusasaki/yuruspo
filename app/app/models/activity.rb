@@ -68,9 +68,17 @@ class Activity < ApplicationRecord
     return false unless self.should_send_notify #ガード文
     messages = messages_for_previous_user
     self.circle.previous_users.each{ |user|
-      LineBot::ForCircle::PushWorker.perform_async(user.line_user_id, messages)
+      LineBot::ForUser::PushWorker.perform_async(user.line_user_id, messages)
     }
     self.update(should_send_notify: false)
+
+    return false unless self.circle.previous_users.present? #誰にも送ってなかったらサークルには送らない
+    wds = ["日", "月", "火", "水", "木", "金", "土"]
+    messages_to_circle = {
+      type: "text",
+      text: "#{self.date.strftime("%-m/%-d")}(#{wds[self.date.wday]})にある#{self.place_content.content.name}の活動について以前来てくれた人にお知らせが送られました！"
+    }
+    LineBot::ForCircle::PushWorker.perform_async(self.circle.owner.line_user_id, messages_to_circle)
   end
   private
 
