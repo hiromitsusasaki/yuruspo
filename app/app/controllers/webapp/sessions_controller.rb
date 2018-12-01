@@ -2,20 +2,27 @@ class Webapp::SessionsController < ApplicationController
   def create
     user = User.find_or_create_from_auth(request.env['omniauth.auth'])
     session[:user_id] = user.id
-    login_as = session[:login_as] 
-    case login_as 
-    when 'user' then
-      # userでログインした場合の処理
-      p 'login as user.'
-      redirect_to root_path
-    when 'circle' then
-      p 'login as circle.'
-      if user.has_circle?
-        #　ログイン（登録済み）の場合
-        redirect_to :controller => 'circles', :action => 'show', :circle_id => user.owned_circle.id
-      else
-        # サインイン初期登録の場合
-        redirect_to :controller => 'circles', :action => 'new'
+    login_as = session[:login_as]
+    previous_url = session[:previous_url]
+    session[:login_as] = nil
+    session[:previous_url] = nil
+    if previous_url
+      redirect_to previous_url
+    else
+      case login_as 
+      when 'user' then
+        # userでログインした場合の処理
+        p 'login as user.'
+        redirect_to root_path
+      when 'circle' then
+        p 'login as circle.'
+        if user.has_circle?
+          #　ログイン（登録済み）の場合
+          redirect_to :controller => 'circles', :action => 'show', :circle_id => user.owned_circle.id
+        else
+          # サインイン初期登録の場合
+          redirect_to :controller => 'circles', :action => 'new'
+        end
       end
     end
   end
