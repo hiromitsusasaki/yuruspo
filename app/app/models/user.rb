@@ -31,8 +31,8 @@ class User < ApplicationRecord
     self.update(is_following_bot_for_circle: false)
   end
 
-  def has_circle
-    owned_circle.nil?
+  def has_circle?
+    !owned_circle.nil?
   end
 
 end
