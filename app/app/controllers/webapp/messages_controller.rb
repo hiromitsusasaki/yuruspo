@@ -1,5 +1,7 @@
 class Webapp::MessagesController < ApplicationController
 
+  before_action :authenticate
+
   def create
     activity = Activity.find(params[:activity_id])
     message = Message.create(message_params)

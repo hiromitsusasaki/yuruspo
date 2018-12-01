@@ -1,5 +1,7 @@
 class Webapp::ActivitiesController < ApplicationController
   
+  before_action :authenticate
+
   def new
     @circle = Circle.find(params[:circle_id])
     @months = months
