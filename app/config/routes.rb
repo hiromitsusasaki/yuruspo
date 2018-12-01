@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   # users
   get 'users/login_as_circle', to: 'webapp/users#login_as_circle'
   get 'users/login_as_user', to: 'webapp/users#login_as_user'
-  # post 'users/login', to: 'webapp/users#login'
+  get 'users/loggedin_as_user', to: 'webapp/users#loggedin_as_user'
   
   # sessions
   get '/logout', to: 'webapp/sessions#destroy'
