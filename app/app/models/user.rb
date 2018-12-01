@@ -15,7 +15,7 @@ class User < ApplicationRecord
     status_message = auth[:info][:description]
     picture_url = auth[:info][:image]
 
-    self.find_or_create_by(line_user_id: uid) do |user|
+    self.find_or_create_by(line_user_id: line_user_id) do |user|
       user.provider = provider
       user.display_name = display_name
       user.status_message = status_message
