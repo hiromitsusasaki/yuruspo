@@ -1,0 +1,102 @@
+<div class="mt-3">
+  <h3>活動予定</h3>
+  <hr />
+  <ul class="list-unstyled">
+  <% @activity.circle.activities.each do |activity| %>
+    <li><%= link_to "#{l(activity.date, format: :short)} #{activity.content.name} @#{activity.place.name}", "/circles/#{@activity.circle.id}/activities/#{activity.id}"  %></li>
+  <% end %>
+  </ul>
+  <hr />
+</div>
+<%= form_tag "/circles/#{@activity.circle.id}/activities/#{@activity.id}", :method => 'patch' do %>
+<div class="mt-4">
+  <h2>活動予定編集</h2>
+    <div class="form-group">
+      <%= label_tag 'content_id', '競技' %>
+      <%= select_tag 'content[id]', options_from_collection_for_select(@activity.circle.contents, :id, :name, @activity.content.id), class: 'form-control' %>
+    </div>
+</div>
+<div class="mt-3">
+  <h3>日程</h3>
+  <div class="row">
+    <div class="col form-inline">
+      <%= select_tag 'date[month]', options_for_select(@months, @activity.date.month), class: 'form-control mr-2', style: "width: 85%;" %>
+      <%= label_tag 'data_month', '月'  %>
+    </div>
+    <div class="col form-inline">
+      <%= select_tag 'date[date]', options_for_select(@days, @activity.date.day), class: 'form-control mr-2', style: "width: 85%;" %>
+      <%= label_tag 'data_date', '日', class: "float-right"  %>
+    </div>
+  </div>
+</div>
+<div class="mt-3">
+  <h3>時間</h3>
+  <div class="row">
+    <div class="col form-inline">
+      <%= select_tag 'start_time[hour]', options_for_select(@hours, @activity.start_time.hour), class: 'form-control mr-2', style: "width: 85%;" %>
+      <%= label_tag 'start_time_hour', '時'  %>
+    </div>
+    <div class="col form-inline">
+      <%= select_tag 'start_time[minute]', options_for_select(@minutes, @activity.start_time.min), class: 'form-control mr-2', style: "width: 85%;" %>
+      <%= label_tag 'start_time_minute', '分', class: "float-right"  %>
+    </div>
+  </div>
+  <div style="width: 100%; text-align:center">↕</div>
+  <div class="row mt-2">
+    <div class="col form-inline">
+      <%= select_tag 'end_time[hour]', options_for_select(@hours, @activity.end_time.hour), class: 'form-control mr-2', style: "width: 85%;" %>
+      <%= label_tag 'end_time_hour', '時'  %>
+    </div>
+    <div class="col form-inline">
+      <%= select_tag 'end_time[minute]', options_for_select(@minutes, @activity.end_time.min), class: 'form-control mr-2', style: "width: 85%;" %>
+      <%= label_tag 'end_time_minute', '分', class: "float-right"  %>
+    </div>
+  </div>
+</div>
+<div class="mt-3">
+  <div class="form-group">
+    <%= label_tag 'activity_address', '活動場所' %>
+    <%= text_field_tag 'place[address]', @activity.place.address, class: 'form-control' %>
+  </div>
+</div>
+<div class="mt-3">
+  <div class="form-group">
+    <%= label_tag 'content', '最大募集人数' %>
+    <div class="form-inline">
+      <%= number_field_tag 'activity[max_member_number]', @activity.max_member_number, class: 'form-control mr-2', style: 'width: 90%;', min: 0 %>人
+    </div>
+  </div>
+</div>
+<div class="mt-3">
+  <%= label_tag 'activity_auto_reply_comment', '自動応答文' %>
+</div>
+<div>
+  <%= text_area_tag 'activity[auto_reply_comment]', @activity.auto_reply_comment, :class => 'form-control', :rows => 5 %>
+</div>
+<div class="mt-3">
+  <fieldset disabled>
+    <div class="form-check">
+      <%= check_box_tag 'activity[should_send_notify]', true, false, {:id => 'acitivity_send_notify', :class => 'form-check-input'} %>
+      <%= label_tag 'activity_send_notify', '以前来てくれた人たちにLINEでお知らせ', :class => 'form-check-label' %>
+    </div>
+  </fieldset>
+  <div class="mt-2 float-right"><%= link_to 'LINEでお知らせとは？', '' %></div>
+</div>
+<%= hidden_field_tag 'prefecture[name]', @activity.place.city.prefecture.name %>
+<%= hidden_field_tag 'city[name]', @activity.place.city.name %>
+<%= hidden_field_tag 'place[name]', @activity.place.name %>
+<%= hidden_field_tag 'place[tel]', @activity.place.tel %>
+<div class="mt-5">
+  <%= button_tag '編集する', :class => 'btn btn-primary', :style => 'width: 100%;' %>
+</div>
+<% end %>
+<div class="mt-3">
+  <%= link_to '活動予定に戻る', "/circles/#{@activity.circle.id}/activities/#{@activity.id}", class: 'btn btn-primary', style: 'width: 100%;' %>
+</div>
+<div class="mt-3">
+  <%= form_tag "/circles/#{@activity.circle.id}/activities/#{@activity.id}", :method => 'delete' do %>
+    <%= button_tag "活動予定を削除する", :class => 'btn btn-danger', :style => 'width: 100%;' %>
+  <% end %>
+</div>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_PLACE_API_KEY'] %>&libraries=places&callback=initAutocomplete" async defer></script>
+

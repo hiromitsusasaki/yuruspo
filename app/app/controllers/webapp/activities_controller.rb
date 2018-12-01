@@ -36,6 +36,14 @@ class Webapp::ActivitiesController < ApplicationController
     end
   end
 
+  def edit
+    @activity = Activity.find(params[:activity_id])
+    @months = months
+    @days = days
+    @hours = hours
+    @minutes = minutes
+  end
+
   private
 
     def activity_params
@@ -71,7 +79,7 @@ class Webapp::ActivitiesController < ApplicationController
     end
   
     def time(date, hour, minute)
-      Time.local(date.year, date.month, date.day, hour.to_i, minute.to_i, 0, 0)
+      Time.zone.local(date.year, date.month, date.day, hour.to_i, minute.to_i, 0, 0)
     end
 
     def date(month, date)
