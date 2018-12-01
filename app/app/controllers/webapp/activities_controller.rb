@@ -61,6 +61,29 @@ class Webapp::ActivitiesController < ApplicationController
     end
   end
 
+  def destroy
+    activity = Activity.find(params[:activity_id])
+    circle = activity.circle
+    ActiveRecord::Base.transaction do
+      activity.messages.each do |message|
+        message.destroy!
+      end
+      activity.activity_reviews do |activity_review|
+        activity_review.destroy!
+      end
+      activity.applications.each do |application|
+        application.chats.each do |chat|
+          chat.destroy!
+        end
+        application.destroy!
+      end
+      activity.destroy!
+    end
+    redirect_to :controller => 'circles', :action => 'show', :circle_id => circle.id
+    rescue => e
+    redirect_to :action => 'edit', :circle_id => activity.circle.id, :activity_id => activity.id
+  end
+
   private
 
     def activity_params
