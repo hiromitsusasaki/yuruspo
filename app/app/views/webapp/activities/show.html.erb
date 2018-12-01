@@ -50,7 +50,11 @@
         <tr>
           <div class="row">
             <div class="col-2">
-              <%= image_tag "icon_profile_no_image", size: "50x50" %>
+              <% if application.user.picture_url.nil? %>
+                <%= image_tag "icon_profile_no_image", size: "50x50", class: 'rounded-circle' %>
+              <% else %>
+                <%= image_tag application.user.picture_url, size: "50x50", class: 'rounded-circle' %>
+              <% end %>
             </div>
             <div class="col-8">
               <div><%= application.user.display_name %></div>
