@@ -1,4 +1,7 @@
 class Webapp::SessionsController < ApplicationController
+  
+    before_action :authenticate, only: [:destroy]
+  
   def create
     user = User.find_or_create_from_auth(request.env['omniauth.auth'])
     session[:user_id] = user.id
@@ -11,11 +14,8 @@ class Webapp::SessionsController < ApplicationController
     else
       case login_as 
       when 'user' then
-        # userでログインした場合の処理
-        p 'login as user.'
-        redirect_to root_path
+        redirect_to :controller => 'users', :action => 'loggedin_as_user'
       when 'circle' then
-        p 'login as circle.'
         if user.has_circle?
           #　ログイン（登録済み）の場合
           redirect_to :controller => 'circles', :action => 'show', :circle_id => user.owned_circle.id
