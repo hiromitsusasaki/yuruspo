@@ -10,12 +10,13 @@ class User < ApplicationRecord
 
   def self.find_or_create_from_auth(auth)
     provider = auth[:provider]
-    uid = auth[:uid]
+    line_user_id = auth[:uid]
     display_name = auth[:info][:name]
     status_message = auth[:info][:description]
     picture_url = auth[:info][:image]
 
-    self.find_or_create_by(provider: provider, uid: uid) do |user|
+    self.find_or_create_by(line_user_id: line_user_id) do |user|
+      user.provider = provider
       user.display_name = display_name
       user.status_message = status_message
       user.picture_url = picture_url
@@ -30,8 +31,8 @@ class User < ApplicationRecord
     self.update(is_following_bot_for_circle: false)
   end
 
-  def has_circle
-    owned_circle.nil?
+  def has_circle?
+    !owned_circle.nil?
   end
 
 end

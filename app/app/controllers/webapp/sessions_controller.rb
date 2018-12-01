@@ -10,12 +10,12 @@ class Webapp::SessionsController < ApplicationController
       redirect_to root_path
     when 'circle' then
       p 'login as circle.'
-      if user.has_circle
-        # サインイン初期登録の場合
-        redirect_to :controller => 'circles', :action => 'new'
-      else
+      if user.has_circle?
         #　ログイン（登録済み）の場合
         redirect_to :controller => 'circles', :action => 'show', :circle_id => user.owned_circle.id
+      else
+        # サインイン初期登録の場合
+        redirect_to :controller => 'circles', :action => 'new'
       end
     end
   end
