@@ -72,7 +72,7 @@
   <% end %>
 </div>
 <div class="mt-5">
-  <%= link_to "全員へメッセージを送る", "", class: "btn btn-primary", style: "width: 100%" %>
+  <%= link_to "全員へメッセージを送る", "", class: "btn btn-primary", style: "width: 100%", data: {toggle: 'modal', target: '#send-message-modal'} %>
 </div>
 <% else %>
 <div>
@@ -107,4 +107,20 @@
   <%= @activity.circle.introduction%>
 </div>
 <% end %>
-
+<div class="modal fade" id="send-message-modal" tabindex="-1" role="dialog" aria-labelledby="sendMessageModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>参加希望者全員に送信</h3>
+      </div>
+      <%= form_tag "/circles/#{@activity.circle.id}/activities/#{@activity.id}/messages" do %>
+      <div class="modal-body">
+        <%= text_area_tag 'message[body]', '', :class => 'form-control', :rows => 10 %>
+      </div>
+      <div class="modal-footer">
+        <%= button_tag "送信", :class => 'btn btn-primary', :style => 'width: 100%;' %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+<div>
