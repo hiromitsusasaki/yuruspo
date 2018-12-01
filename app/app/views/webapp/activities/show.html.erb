@@ -1,0 +1,110 @@
+<div class="mt-3">
+  <div class="row">
+    <div class="col-4">
+      <%= content_icon @activity.content.id %>
+    </div>
+    <div class="col-7">
+      <h2 class="mt-5 ml-2" style="font-size: 140%"><%= @activity.content.name %></h2>
+      <h3 class="mt-2 text-right font-weight-bold">in <%= @activity.place.city.prefecture.name %></h3>
+    </div>
+    <div class="col-1"></div>
+  </div>
+</div>
+<div class="mt-5">
+  <h3 class="font-weight-bold">詳細情報</h3>
+</div>
+<hr />
+<table class="table show table-bordered">
+  <tr>
+    <th>日時</th>
+    <td><%= l(@activity.date, format: :long) %>&nbsp;<%= l(@activity.start_time, format: :only_time)%>&nbsp;-&nbsp;<%= l(@activity.end_time, format: :only_time) %></td>
+  </tr>
+  <tr>
+    <th>場所</th>
+    <td>
+      <div>
+        <%= @activity.place.address %>(<%= @activity.place.name %>)
+      </div>
+      <div class="mt-2">
+        <%= link_to "GoogleMapを開く", "http://maps.google.co.jp/maps?q=" + @activity.place.address, class: "btn btn-primary", style: "width: 100%;" %>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <th>企画者</th>
+    <td><%= link_to @activity.circle.name, "/circles/#{@activity.circle.id}" %></td>
+  </tr>
+</table>
+<% if current_user.id == @activity.circle.owner.id %>
+<div>
+  <%= link_to "予定を編集する", "/circles/#{@activity.circle.id}/activities/#{@activity.id}/edit", class: "btn btn-primary", style: "width: 100%" %>
+</div>
+<div class="mt-3">
+  <h3 class="font-weight-bold">チャット</h3>
+  <hr />
+</div>
+<div class="mt-3" style="min-height: 50px;">
+  <% if @activity.applications.size > 0 %>
+    <table class="table">
+      <% @activity.applications.each do |application| %>
+        <tr>
+          <div class="row">
+            <div class="col-2">
+              <% if application.user.picture_url.nil? %>
+                <%= image_tag "icon_profile_no_image", size: "50x50", class: 'rounded-circle' %>
+              <% else %>
+                <%= image_tag application.user.picture_url, size: "50x50", class: 'rounded-circle' %>
+              <% end %>
+            </div>
+            <div class="col-8">
+              <div><%= link_to application.user.display_name, "/circles/#{@activity.circle.id}/activities/#{@activity.id}/applications/#{application.id}" %></div>
+              <div class="font-weight-light chat recently"><%= application.chats.where(speaker: :user).order('created_at desc').first.body.truncate(10) %></div>
+            </div>
+            <div class="col-2">
+              <span class="badge badge-success"><%= application.chats.where(speaker: :user, is_already_read: false).count %></span>
+            </div>
+          <div>
+        </tr>
+      <% end %>
+    </table>
+  <% else %>
+  <p>問い合わせはまだありません</p>
+  <% end %>
+</div>
+<div class="mt-5">
+  <%= link_to "全員へメッセージを送る", "", class: "btn btn-primary", style: "width: 100%" %>
+</div>
+<% else %>
+<div>
+  <% if @user_application.nil? %>
+    <%= form_tag "/circles/#{@activity.circle.id}/activities/#{@activity.id}/applications" do %>
+      <%= button_tag 'チャットへ', :class => 'btn btn-primary', :style => 'width: 100%;' %>
+    <% end %>
+  <% else %>
+    <%= link_to "チャットへ", "/circles/#{@activity.circle.id}/activities/#{@activity.id}/applications/#{@user_application.id}", :class => 'btn btn-primary', :style => 'width: 100%;' %>
+  <% end %>
+</div>
+<div class="mt-3 mb-3">
+  <% if @user_application.nil? %>
+    <%= form_tag "/circles/#{@activity.circle.id}/activities/#{@activity.id}/applications" do %>
+      <%= hidden_field_tag 'is_join_request', true %>
+      <%= button_tag '参加を申し込む', :class => 'btn btn-primary', :style => 'width: 100%;' %>
+    <% end %>
+  <% else %>
+    <%= link_to "参加を申し込む", "/circles/#{@activity.circle.id}/activities/#{@activity.id}/applications/#{@user_application.id}?is_join_request=true", :class => 'btn btn-primary', :style => 'width: 100%;' %>
+  <% end %>
+</div>
+<hr />
+<div class="mt-3">
+  <h3><%= link_to @activity.circle.name, "/circles/#{@activity.circle.id}" %></h3>
+</div>
+<hr />
+<div class="mt-3">
+  <%= image_tag 'https://via.placeholder.com/370x250' %>
+</div>
+<hr />
+<div class="mt-3 mb-5">
+  <%= @activity.circle.introduction%>
+</div>
+<% end %>
+
