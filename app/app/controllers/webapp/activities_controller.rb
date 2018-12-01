@@ -31,6 +31,9 @@ class Webapp::ActivitiesController < ApplicationController
 
   def show
     @activity = Activity.find(params[:activity_id])
+    if current_user != @activity.circle.owner
+      @user_application = Application.find_by(user: current_user, activity: @activity)
+    end
   end
 
   private
