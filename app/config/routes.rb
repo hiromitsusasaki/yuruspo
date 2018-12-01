@@ -52,13 +52,13 @@ Rails.application.routes.draw do
   #applications
   post 'circles/:circle_id/activities/:activity_id/applications/', to: 'webapp/applications#create'
   delete 'circles/:circle_id/activities/:activity_id/applications/:application_id', to: 'webapp/applications#destroy'
+  get 'circles/:circle_id/activities/:activity_id/applications/:application_id', to: 'webapp/applications#show'
 
   # reviews
   get 'circles/:circle_id/activities/:activity_id/review/new', to: 'webapp/reviews#new'
   post 'circles/:circle_id/activities/:activity_id/review', to: 'webapp/reviews#create'
 
   #chats
-  get 'circles/:circle_id/activities/:activity_id/applications/:application_id/chats', to: 'webapp/chats#list'
   post 'circles/:circle_id/activities/:activity_id/applications/:application_id/chats', to: 'webapp/chats#create'
 
 end

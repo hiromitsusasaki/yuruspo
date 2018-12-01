@@ -1,0 +1,40 @@
+<div class="chat-container">
+  <div class="chat-stream">
+    <% @chats.each do |chat| %>
+      <% if @application.activity.circle.owner == current_user %>
+        <% if chat.speaker == 'circle' %>
+          <div class="clearfix chat-body mine">
+            <%= chat.body %>
+          </div>
+        <% else %>
+          <div class="clearfix chat-body others">
+            <%= chat.body %>
+          </div>
+        <% end %>
+      <% else %>
+        <% if chat.speaker == 'circle' %>
+          <div class="clearfix chat-body others">
+            <%= chat.body %>
+          </div>
+        <% else %>
+          <div class="clearfix chat-body mine">
+            <%= chat.body %>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="chat-control">
+    <%= form_tag "/circles/#{@application.activity.circle.id}/activities/#{@application.activity.id}/applications/#{@application.id}/chats" do %>
+      <div class="mt-1">
+        <%= text_area_tag 'chat[body]', '', :class => 'form-control', :rows => 3 %>
+      </div>
+      <div class="mt-3">
+        <%= button_tag "送信", class: "btn btn-primary", style: "width: 100%;" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+<script>
+  $('.chat-stream').animate({scrollTop: $('.chat-stream')[0].scrollHeight}, 'fast');
+</script>
