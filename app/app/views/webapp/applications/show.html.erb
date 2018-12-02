@@ -22,5 +22,6 @@
       speaker: "<%= @application.activity.circle.owner == current_user ? "circle" : "user" %>"
     }
     App.room.speak(chat);
+    $('#chat_body').val("")
   });
 </script>

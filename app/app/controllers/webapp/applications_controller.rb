@@ -15,8 +15,8 @@ class Webapp::ApplicationsController < ApplicationController
   def show
     p params
     @application = Application.find(params[:application_id])
-    # @chats = Chat.where(application_id: params[:application_id])
-    @chats = dummy_chats(@application)
+    @chats = Chat.where(application_id: params[:application_id])
+    # @chats = dummy_chats(@application)
     if @application.activity.circle.owner == current_user
       @chats.each do |chat|
         if !chat.is_already_read
