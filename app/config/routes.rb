@@ -1,6 +1,6 @@
 require 'sidekiq/web'
 Rails.application.routes.draw do
-  
+
   # top page
   root 'webapp/static_pages#index'
 
@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   # linebot callback
   post '/line/callback_for_user', to: 'bot/line_webhook#callback_for_user'
   post '/line/callback_for_circle', to: 'bot/line_webhook#callback_for_circle'
-  
+
   mount Sidekiq::Web, at: '/sidekiq'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   get 'users/login_as_circle', to: 'webapp/users#login_as_circle'
   get 'users/login_as_user', to: 'webapp/users#login_as_user'
   get 'users/loggedin_as_user', to: 'webapp/users#loggedin_as_user'
-  
+
   # sessions
   post '/login_by_user_id', to: 'webapp/sessions#login_by_user_id'
   get '/logout', to: 'webapp/sessions#destroy'
@@ -42,7 +42,7 @@ Rails.application.routes.draw do
   patch 'circles/:circle_id/activities/:activity_id', to: 'webapp/activities#update'
   delete 'circles/:circle_id/activities/:activity_id', to: 'webapp/activities#destroy'
   get 'circles/:circle_id/activities/:activity_id', to: 'webapp/activities#show'
-  
+
   # messages
   post 'circles/:circle_id/activities/:activity_id/messages', to: 'webapp/messages#create'
 
@@ -62,4 +62,7 @@ Rails.application.routes.draw do
   #chats
   post 'circles/:circle_id/activities/:activity_id/applications/:application_id/chats', to: 'webapp/chats#create'
 
+  #owned_circle
+  get 'owned_circle', to: 'webapp/redirect#to_owned_circle_show'
+  get 'owned_circle/activities/new', to: 'webapp/redirect#to_owned_circle_activities_new'
 end
