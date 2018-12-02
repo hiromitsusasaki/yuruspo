@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181201021736) do
+ActiveRecord::Schema.define(version: 20181202041418) do
 
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "circle_id"
@@ -51,12 +51,13 @@ ActiveRecord::Schema.define(version: 20181201021736) do
 
   create_table "chats", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "application_id"
-    t.integer "speaker", limit: 1, default: 0, null: false
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "is_already_read", default: false
+    t.bigint "speaker_id"
     t.index ["application_id"], name: "index_chats_on_application_id"
+    t.index ["speaker_id"], name: "index_chats_on_speaker_id"
   end
 
   create_table "circle_contents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -187,6 +188,7 @@ ActiveRecord::Schema.define(version: 20181201021736) do
   add_foreign_key "applications", "activities"
   add_foreign_key "applications", "users"
   add_foreign_key "chats", "applications"
+  add_foreign_key "chats", "users", column: "speaker_id"
   add_foreign_key "circle_contents", "circles"
   add_foreign_key "circle_contents", "contents"
   add_foreign_key "circles", "users", column: "owner_id"
