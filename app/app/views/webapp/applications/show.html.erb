@@ -36,6 +36,11 @@
 <script>
   $('.chat-stream').animate({scrollTop: $('.chat-stream')[0].scrollHeight}, 'fast');
   $('#chat-send-button').on('click', function() {
-    App.room.speak($('#chat_body').val());
+    chat = {
+      body: $('#chat_body').val(),
+      application_id: <%= @application.id %>,
+      speaker: "<%= @application.activity.circle.owner == current_user ? "circle" : "user" %>"
+    }
+    App.room.speak(chat);
   });
 </script>

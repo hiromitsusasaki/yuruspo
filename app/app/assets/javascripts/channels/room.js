@@ -8,12 +8,12 @@ App.room = App.cable.subscriptions.create("RoomChannel", {
   },
 
   received: function (data) {
-    alert(data['message'])
+    alert(data["chat"]["body"])
   },
 
-  speak: function (message) {
+  speak: function (chat) {
     return this.perform('speak', {
-      message: message
+      chat: chat
     });
   }
 });
