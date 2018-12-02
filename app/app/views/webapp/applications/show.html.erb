@@ -1,7 +1,7 @@
 <div class="chat-container">
   <div class="chat-stream">
     <% @chats.each do |chat| %>
-      <%=  render :partial => "chat_body", :locals => {application: @application, chat: chat} %>
+      <%=  render :partial => "chat_body", :locals => {chat: chat} %>
     <% end %>
   </div>
   <div class="chat-control">

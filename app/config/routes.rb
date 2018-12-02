@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   get 'users/loggedin_as_user', to: 'webapp/users#loggedin_as_user'
   
   # sessions
+  post '/login_by_user_id', to: 'webapp/sessions#login_by_user_id'
   get '/logout', to: 'webapp/sessions#destroy'
 
   # cricles

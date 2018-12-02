@@ -27,6 +27,12 @@ class Webapp::SessionsController < ApplicationController
     end
   end
 
+  def login_by_user_id
+    user = User.find(params.require('user').permit(:id)[:id])
+    session[:user_id] = user.id
+    redirect_to :controller => 'users', :action => 'loggedin_as_user'
+  end
+
   def destroy
 
     reset_session
