@@ -14,6 +14,9 @@
   </div>
 </div>
 <script>
+  $(document).ready(function(){
+    App.makeChatChannel(<%= @application.id %>)
+  });
   $('.chat-stream').animate({scrollTop: $('.chat-stream')[0].scrollHeight}, 'fast');
   $('#chat-send-button').on('click', function() {
     chat = {
