@@ -1,0 +1,21 @@
+<% if application.activity.circle.owner == current_user %>
+  <% if chat.speaker == 'circle' %>
+    <div class="clearfix chat-body mine">
+      <%= chat.body %>
+    </div>
+  <% else %>
+    <div class="clearfix chat-body others">
+      <%= chat.body %>
+    </div>
+  <% end %>
+<% else %>
+  <% if chat.speaker == 'circle' %>
+    <div class="clearfix chat-body others">
+      <%= chat.body %>
+    </div>
+  <% else %>
+    <div class="clearfix chat-body mine">
+      <%= chat.body %>
+    </div>
+  <% end %>
+<% end %>
