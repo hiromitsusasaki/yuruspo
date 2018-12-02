@@ -13,36 +13,19 @@ class Webapp::ApplicationsController < ApplicationController
   end
 
   def show
-    p params
     @application = Application.find(params[:application_id])
-    @chats = Chat.where(application_id: params[:application_id])
-    # @chats = dummy_chats(@application)
-    if @application.activity.circle.owner == current_user
-      @chats.each do |chat|
-        if !chat.is_already_read
-          chat.is_already_read = true
-          chat.save
+    if current_user == @application.user or current_user == @application.activity.circle.owner
+      @chats = Chat.where(application_id: params[:application_id])
+      if @application.activity.circle.owner == current_user
+        @chats.each do |chat|
+          if !chat.is_already_read
+            chat.is_already_read = true
+            chat.save
+          end
         end
       end
+    else
+      not_found
     end
   end
-
-  private 
-  
-  def dummy_chats(application)
-    chats = []
-    for num in 0..20 do
-      chat = Chat.new(application: application)
-      chat.body = "ああああああああああああああああああああああああ"
-      if num % 2 == 0
-        chat.speaker = :user
-      else
-        chat.speaker = :circle
-      end
-      p chat.speaker
-      chats << chat
-    end
-    chats
-  end
-
 end
