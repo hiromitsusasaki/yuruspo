@@ -9,6 +9,19 @@
     </div>
   </div>
 </div>
+<div class="row mt-5">
+  <div class="col">
+    <h3>テストログイン</h3>
+    <%= form_tag '/login_by_user_id' do %>
+      <div>
+        <%= text_field_tag 'user[id]', '', :class => 'form-control' %>
+      </div>
+      <div class="mt-3">
+        <%= button_tag "ユーザーIDでログイン", class: "btn btn-primary", style: "width: 100%;" %>
+      </div>
+    <% end %>
+  </div>
+</div>
 <script>
   var placeSearch, autocomplete;
   function initAutocomplete() {

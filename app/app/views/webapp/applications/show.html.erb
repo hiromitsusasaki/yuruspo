@@ -1,0 +1,29 @@
+<div class="chat-container">
+  <div class="chat-stream <%= @application.activity.circle.owner == current_user ? 'circle' : 'user' %>">
+    <% @chats.each do |chat| %>
+      <%=  render :partial => "chat_body", :locals => {chat: chat} %>
+    <% end %>
+  </div>
+  <div class="chat-control">
+      <div class="mt-1">
+        <%= text_area_tag 'chat[body]', '', :class => 'form-control', :rows => 3, data: {behavior: 'room_speaker'} %>
+      </div>
+      <div class="mt-3">
+        <%= button_tag "送信", id: "chat-send-button", class: "btn btn-primary", style: "width: 100%;" %>
+      </div>
+  </div>
+</div>
+<script>
+  $(document).ready(function(){
+    App.makeChatChannel(<%= @application.id %>)
+  });
+  $('.chat-stream').animate({scrollTop: $('.chat-stream')[0].scrollHeight}, 'fast');
+  $('#chat-send-button').on('click', function() {
+    chat = {
+      body: $('#chat_body').val(),
+      application_id: <%= @application.id %>
+    }
+    App.room.speak(chat);
+    $('#chat_body').val("")
+  });
+</script>

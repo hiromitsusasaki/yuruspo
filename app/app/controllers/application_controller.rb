@@ -15,7 +15,12 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate
+    session[:previous_url] = request.url
     return if logged_in?
     redirect_to root_path
+  end
+
+  def not_found
+    raise ActionController::RoutingError.new('Not Found')
   end
 end

@@ -22,9 +22,10 @@ Rails.application.routes.draw do
   # users
   get 'users/login_as_circle', to: 'webapp/users#login_as_circle'
   get 'users/login_as_user', to: 'webapp/users#login_as_user'
-  # post 'users/login', to: 'webapp/users#login'
+  get 'users/loggedin_as_user', to: 'webapp/users#loggedin_as_user'
   
   # sessions
+  post '/login_by_user_id', to: 'webapp/sessions#login_by_user_id'
   get '/logout', to: 'webapp/sessions#destroy'
 
   # cricles
@@ -42,20 +43,23 @@ Rails.application.routes.draw do
   delete 'circles/:circle_id/activities/:activity_id', to: 'webapp/activities#destroy'
   get 'circles/:circle_id/activities/:activity_id', to: 'webapp/activities#show'
   
-  # message
+  # messages
+  post 'circles/:circle_id/activities/:activity_id/messages', to: 'webapp/messages#create'
+
+  # user_blocks
   get 'circles/:circle_id/activities/:activity_id/user_blocks/new', to: 'webapp/user_blocks#new'
   post 'circles/:circle_id/activities/:activity_id/user_blocks', to: 'webapp/user_blocks#create'
 
   #applications
   post 'circles/:circle_id/activities/:activity_id/applications/', to: 'webapp/applications#create'
   delete 'circles/:circle_id/activities/:activity_id/applications/:application_id', to: 'webapp/applications#destroy'
+  get 'circles/:circle_id/activities/:activity_id/applications/:application_id', to: 'webapp/applications#show'
 
   # reviews
   get 'circles/:circle_id/activities/:activity_id/review/new', to: 'webapp/reviews#new'
   post 'circles/:circle_id/activities/:activity_id/review', to: 'webapp/reviews#create'
 
   #chats
-  get 'circles/:circle_id/activities/:activity_id/applications/:application_id/chats', to: 'webapp/chats#list'
   post 'circles/:circle_id/activities/:activity_id/applications/:application_id/chats', to: 'webapp/chats#create'
 
 end

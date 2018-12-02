@@ -1,0 +1,9 @@
+<% if chat.speaker == chat.application.activity.circle.owner %>
+  <div class="clearfix chat-body circle">
+    <%= simple_format(chat.body) %>
+  </div>
+<% else %>
+  <div class="clearfix chat-body user">
+    <%= simple_format(chat.body) %>
+  </div>
+<% end %>
