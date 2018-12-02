@@ -2,3 +2,49 @@
   Place all the styles related to the matching controller here.
   They will automatically be included in application.css.
 */
+
+.chat-container {
+  position: relative;
+  height: 90vh;
+}
+
+.chat-control {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+}
+
+.chat-stream {
+  overflow: auto;
+  height: 71vh;
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+.chat-body {
+  width: 70%;
+  border-radius: 15px;
+  padding: 12px;
+  margin-bottom: 24px;
+  font-size: 80%;
+}
+
+.chat-stream.circle .chat-body.user {
+  background-color: #cccccc;
+  float: left
+}
+
+.chat-stream.circle .chat-body.circle {
+  background-color: cornflowerblue;
+  float: right;
+}
+
+.chat-stream.user .chat-body.user {
+  background-color: cornflowerblue;
+  float: right;
+}
+
+.chat-stream.user .chat-body.circle {
+  background-color: #cccccc;
+  float: left
+}

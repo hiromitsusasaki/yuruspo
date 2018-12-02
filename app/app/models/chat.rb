@@ -1,5 +1,5 @@
 class Chat < ApplicationRecord
   belongs_to :application
-
-  enum speaker: {user: 0, circle: 1}
+  belongs_to :speaker, class_name: 'User' 
+  after_create_commit {ChatBroadcastJob.perform_later self }
 end
