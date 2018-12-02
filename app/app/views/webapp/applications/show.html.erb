@@ -1,5 +1,5 @@
 <div class="chat-container">
-  <div class="chat-stream">
+  <div class="chat-stream <%= @application.activity.circle.owner == current_user ? 'circle' : 'user' %>">
     <% @chats.each do |chat| %>
       <%=  render :partial => "chat_body", :locals => {chat: chat} %>
     <% end %>
@@ -18,8 +18,7 @@
   $('#chat-send-button').on('click', function() {
     chat = {
       body: $('#chat_body').val(),
-      application_id: <%= @application.id %>,
-      speaker: "<%= @application.activity.circle.owner == current_user ? "circle" : "user" %>"
+      application_id: <%= @application.id %>
     }
     App.room.speak(chat);
     $('#chat_body').val("")

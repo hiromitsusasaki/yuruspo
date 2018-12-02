@@ -1,21 +1,9 @@
-<% if chat.application.activity.circle.owner == current_user %>
-  <% if chat.speaker == 'circle' %>
-    <div class="clearfix chat-body mine">
-      <%= chat.body %>
-    </div>
-  <% else %>
-    <div class="clearfix chat-body others">
-      <%= chat.body %>
-    </div>
-  <% end %>
+<% if chat.speaker == chat.application.activity.circle.owner %>
+  <div class="clearfix chat-body circle">
+    <%= chat.body %>
+  </div>
 <% else %>
-  <% if chat.speaker == 'circle' %>
-    <div class="clearfix chat-body others">
-      <%= chat.body %>
-    </div>
-  <% else %>
-    <div class="clearfix chat-body mine">
-      <%= chat.body %>
-    </div>
-  <% end %>
+  <div class="clearfix chat-body user">
+    <%= chat.body %>
+  </div>
 <% end %>

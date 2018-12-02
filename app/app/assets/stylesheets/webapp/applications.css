@@ -29,12 +29,22 @@
   font-size: 80%;
 }
 
-.chat-body.others {
+.chat-stream.circle .chat-body.user {
   background-color: #cccccc;
   float: left
 }
 
-.chat-body.mine {
+.chat-stream.circle .chat-body.circle {
   background-color: cornflowerblue;
   float: right;
+}
+
+.chat-stream.user .chat-body.user {
+  background-color: cornflowerblue;
+  float: right;
+}
+
+.chat-stream.user .chat-body.circle {
+  background-color: #cccccc;
+  float: left
 }

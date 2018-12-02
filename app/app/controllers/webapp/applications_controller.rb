@@ -7,7 +7,7 @@ class Webapp::ApplicationsController < ApplicationController
     if params[:is_join_request]
       application.status = :requested
       application.save
-      chat = Chat.create(application_id: application.id, speaker: :user, body: "参加リクエストを送りました")
+      chat = Chat.create(application_id: application.id, speaker: current_user, body: "参加リクエストを送りました")
     end
     redirect_to :action => 'show', :circle_id => application.activity.circle.id, :activity_id => application.activity.id, :application_id => application.id
   end
