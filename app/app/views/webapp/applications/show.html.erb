@@ -25,16 +25,17 @@
     <% end %>
   </div>
   <div class="chat-control">
-    <%= form_tag "/circles/#{@application.activity.circle.id}/activities/#{@application.activity.id}/applications/#{@application.id}/chats" do %>
       <div class="mt-1">
-        <%= text_area_tag 'chat[body]', '', :class => 'form-control', :rows => 3 %>
+        <%= text_area_tag 'chat[body]', '', :class => 'form-control', :rows => 3, data: {behavior: 'room_speaker'} %>
       </div>
       <div class="mt-3">
-        <%= button_tag "送信", class: "btn btn-primary", style: "width: 100%;" %>
+        <%= button_tag "送信", id: "chat-send-button", class: "btn btn-primary", style: "width: 100%;" %>
       </div>
-    <% end %>
   </div>
 </div>
 <script>
   $('.chat-stream').animate({scrollTop: $('.chat-stream')[0].scrollHeight}, 'fast');
+  $('#chat-send-button').on('click', function() {
+    App.room.speak($('#chat_body').val());
+  });
 </script>
