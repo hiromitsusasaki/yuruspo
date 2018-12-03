@@ -50,3 +50,15 @@ function geolocate() {
     })
   }
 }
+
+$(function () {
+  $('#btn-add-activity').click(function () {
+    $('form#form-add-activity').submit();
+  });
+  $('#btn-edit-activity').click(function () {
+    $('form#form-edit-activity').submit();
+  });
+  $('#btn-delete-activity').click(function () {
+    $('form#form-delete-activity').submit();
+  });
+});
