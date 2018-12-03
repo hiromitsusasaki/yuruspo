@@ -8,7 +8,7 @@
   </ul>
   <hr />
 </div>
-<%= form_tag "/circles/#{@activity.circle.id}/activities/#{@activity.id}", :method => 'patch' do %>
+<%= form_tag "/circles/#{@activity.circle.id}/activities/#{@activity.id}", :id => 'form-edit-activity', :method => 'patch' do %>
 <div class="mt-4">
   <h2>活動予定編集</h2>
     <div class="form-group">
@@ -87,15 +87,15 @@
 <%= hidden_field_tag 'place[name]', @activity.place.name %>
 <%= hidden_field_tag 'place[tel]', @activity.place.tel %>
 <div class="mt-5">
-  <%= button_tag '編集する', :class => 'btn btn-primary', :style => 'width: 100%;' %>
+  <%= button_tag '編集する', :type => 'button', :id => 'btn-edit-activity', :class => 'btn btn-primary', :style => 'width: 100%;' %>
 </div>
 <% end %>
 <div class="mt-3">
   <%= link_to '活動予定に戻る', "/circles/#{@activity.circle.id}/activities/#{@activity.id}", class: 'btn btn-primary', style: 'width: 100%;' %>
 </div>
 <div class="mt-3">
-  <%= form_tag "/circles/#{@activity.circle.id}/activities/#{@activity.id}", :method => 'delete' do %>
-    <%= button_tag "活動予定を削除する", :class => 'btn btn-danger', :style => 'width: 100%;' %>
+  <%= form_tag "/circles/#{@activity.circle.id}/activities/#{@activity.id}", :id => 'form-delete-activity', :method => 'delete' do %>
+    <%= button_tag "活動予定を削除する", :type => 'button', :id => 'btn-delete-activity', :class => 'btn btn-danger', :style => 'width: 100%;' %>
   <% end %>
 </div>
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_PLACE_API_KEY'] %>&libraries=places&callback=initAutocomplete" async defer></script>
