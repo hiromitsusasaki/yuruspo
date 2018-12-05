@@ -4,6 +4,8 @@ class Webapp::ReviewsController < ApplicationController
   def new
     @activity = Activity.find(params[:activity_id])
     @user = current_user
+    # 自分のサークルのレビューページに入りそうだったらその人のサークル詳細ページへリダイレクト
+    redirect_to controller: "circles", action: "show", circle_id: @user.owned_circle_id if @activity.circle.owner == @user
   end
 
   def create
