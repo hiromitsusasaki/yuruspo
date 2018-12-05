@@ -12,22 +12,26 @@ class Webapp::ActivitiesController < ApplicationController
 
   def create
     circle = Circle.find(params[:circle_id])
-    activity = Activity.new(activity_params)
-    activity.circle = circle
-    place = Place.find_or_initialize_by(place_params)
-    place.city = Prefecture.find_by(name: prefecture_params[:name]).cities.find_by(name: city_params[:name])
-    place.save
-    content = Content.find(content_params[:id])
-    activity.place_content = PlaceContent.find_or_create_by(place: place, content: content)
-    date = date(date_params[:month], date_params[:date])
-    activity.date = date
-    activity.start_time = time(date, start_time_params[:hour], start_time_params[:minute])
-    activity.end_time = time(date, end_time_params[:hour], end_time_params[:minute])
-    if activity.save
-      redirect_to :action => 'show', :circle_id => circle.id, :activity_id => activity.id
-    else
-      redirect_to :action => 'new', :circle_id => circle.id, :flash => {error: '新規活動登録に失敗しました'}
+    if prefecture_params[:name].blank? or city_params[:name].blank?
+      return redirect_to :action => 'new', :circle_id => circle.id, :flash => {error: '新規活動登録に失敗しました'}
     end
+    ActiveRecord::Base.transaction do
+      activity = Activity.new(activity_params)
+      activity.circle = circle
+      place = Place.find_or_initialize_by(place_params)
+      place.city = Prefecture.find_by(name: prefecture_params[:name]).cities.find_by(name: city_params[:name])
+      place.save!
+      content = Content.find(content_params[:id])
+      activity.place_content = PlaceContent.find_or_create_by(place: place, content: content)
+      date = date(date_params[:month], date_params[:date])
+      activity.date = date
+      activity.start_time = time(date, start_time_params[:hour], start_time_params[:minute])
+      activity.end_time = time(date, end_time_params[:hour], end_time_params[:minute])
+      activity.save!
+    end
+    redirect_to :action => 'show', :circle_id => circle.id, :activity_id => activity.id
+    rescue => e
+    redirect_to :action => 'new', circle_id => circle.id, :flash => {error: '新規活動登録に失敗しました'}
   end
 
   def show
@@ -46,21 +50,27 @@ class Webapp::ActivitiesController < ApplicationController
   end
 
   def update
-    activity = Activity.update(activity_params)[0]
-    place = Place.find_or_initialize_by(place_params)
-    place.city = Prefecture.find_by(name: prefecture_params[:name]).cities.find_by(name: city_params[:name])
-    place.save
-    content = Content.find(content_params[:id])
-    activity.place_content = PlaceContent.find_or_create_by(place: place, content: content)
-    date = date(date_params[:month], date_params[:date])
-    activity.date = date
-    activity.start_time = time(date, start_time_params[:hour], start_time_params[:minute])
-    activity.end_time = time(date, end_time_params[:hour], end_time_params[:minute])
-    if activity.save
-      redirect_to :action => 'show', :circle_id => activity.circle.id, :activity_id => activity.id
-    else
-      redirect_to :action => 'edit', :circle_id => activity.circle.id, :activity_id => activity.id, :flash => {error: '新規活動登録に失敗しました'}
+    activity = Activity.find(params[:activity_id])
+    if prefecture_params[:name].blank? or city_params[:name].blank?
+      return redirect_to :action => 'new', :circle_id => circle.id, :flash => {error: '新規活動登録に失敗しました'}
     end
+    ActiveRecord::Base.transaction do
+      activity.max_member_number = activity_params[:max_member_number]
+      activity.auto_reply_comment = activity_params[:auto_reply_comment]
+      place = Place.find_or_initialize_by(place_params)
+      place.city = Prefecture.find_by(name: prefecture_params[:name]).cities.find_by(name: city_params[:name])
+      place.save!
+      content = Content.find(content_params[:id])
+      activity.place_content = PlaceContent.find_or_create_by(place: place, content: content)
+      date = date(date_params[:month], date_params[:date])
+      activity.date = date
+      activity.start_time = time(date, start_time_params[:hour], start_time_params[:minute])
+      activity.end_time = time(date, end_time_params[:hour], end_time_params[:minute])
+      activity.save!
+    end
+    redirect_to :action => 'show', :circle_id => activity.circle.id, :activity_id => activity.id
+    rescue => e
+    redirect_to :action => 'edit', :circle_id => activity.circle.id, :activity_id => activity.id, :flash => {error: '新規活動登録に失敗しました'}
   end
 
   def destroy
@@ -81,9 +91,9 @@ class Webapp::ActivitiesController < ApplicationController
       end
       activity.destroy!
     end
-    redirect_to :controller => 'circles', :action => 'show', :circle_id => circle.id
+      redirect_to :controller => 'circles', :action => 'show', :circle_id => circle.id
     rescue => e
-    redirect_to :action => 'edit', :circle_id => activity.circle.id, :activity_id => activity.id
+      redirect_to :action => 'edit', :circle_id => activity.circle.id, :activity_id => activity.id
   end
 
   private
@@ -151,5 +161,4 @@ class Webapp::ActivitiesController < ApplicationController
     def minutes
       [0, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55]
     end
-
 end
