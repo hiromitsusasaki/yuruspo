@@ -11,11 +11,6 @@ table.table.show td {
   width: 80%;
 }
 
-svg.icon_content {
-  width: 120px !important;
-  height: 120px !important;
-}
-
 svg.icon_content .st0 {
   fill: #1587CA !important;
 }
