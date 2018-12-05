@@ -2,3 +2,39 @@
   Place all the styles related to the matching controller here.
   They will automatically be included in application.css.
 */
+.evaluation{
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+.evaluation input[type='radio']{
+  display: none;
+}
+.evaluation label{
+  position: relative;
+  padding: 0px 7px 0;
+  color: gray;
+  cursor: pointer;
+  font-size: 50px;
+  line-height: 1;
+}
+.evaluation label:hover,
+.evaluation label:hover ~ label,
+.evaluation input[type='radio']:checked ~ label{
+  color: #ffcc00;
+}
+
+.star-container{
+  display: flex;
+}
+.star{
+  position: relative;
+  padding: 0px 3px 0;
+  color: gray;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+}
+.star-colored{
+  color: #ffcc00;
+}

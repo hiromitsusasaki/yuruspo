@@ -1,0 +1,37 @@
+<div class="mt-3">
+  <div class="row">
+    <div class="col-4">
+      <%= content_icon @activity.content.id, style: "width: 120px; height: 120px;"%>
+    </div>
+    <div class="col-7">
+      <h2 class="mt-5 ml-2" style="font-size: 140%"><%= @activity.content.name %></h2>
+      <h3 class="mt-2 text-right font-weight-bold">in <%= @activity.place.city.prefecture.name %></h3>
+    </div>
+    <div class="col-1"></div>
+  </div>
+</div>
+<div class="mt-5">
+  <h3 class="font-weight-bold">詳細情報</h3>
+</div>
+<hr />
+<table class="table show table-bordered">
+  <tr>
+    <th>日時</th>
+    <td><%= l(@activity.date, format: :long) %>&nbsp;<%= l(@activity.start_time, format: :only_time)%>&nbsp;-&nbsp;<%= l(@activity.end_time, format: :only_time) %></td>
+  </tr>
+  <tr>
+    <th>場所</th>
+    <td>
+      <div>
+        <%= @activity.place.address %>(<%= @activity.place.name %>)
+      </div>
+      <div class="mt-2">
+        <%= link_to "GoogleMapを開く", "http://maps.google.co.jp/maps?q=" + @activity.place.address, class: "btn btn-primary", style: "width: 100%;" %>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <th>企画者</th>
+    <td><%= link_to @activity.circle.name, "/circles/#{@activity.circle.id}" %></td>
+  </tr>
+</table>

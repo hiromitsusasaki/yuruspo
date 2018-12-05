@@ -56,8 +56,9 @@ Rails.application.routes.draw do
   get 'circles/:circle_id/activities/:activity_id/applications/:application_id', to: 'webapp/applications#show'
 
   # reviews
-  get 'circles/:circle_id/activities/:activity_id/review/new', to: 'webapp/reviews#new'
-  post 'circles/:circle_id/activities/:activity_id/review', to: 'webapp/reviews#create'
+  get 'circles/:circle_id/activities/:activity_id/reviews/new', to: 'webapp/reviews#new'
+  post 'circles/:circle_id/activities/:activity_id/reviews', to: 'webapp/reviews#create'
+  get 'circles/:circle_id/activities/:activity_id/reviews/:review_id/complete', to: 'webapp/reviews#complete'
 
   #chats
   post 'circles/:circle_id/activities/:activity_id/applications/:application_id/chats', to: 'webapp/chats#create'

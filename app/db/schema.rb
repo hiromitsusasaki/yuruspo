@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181202041418) do
+ActiveRecord::Schema.define(version: 20181205113653) do
 
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "circle_id"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20181202041418) do
     t.text "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["activity_id", "user_id"], name: "index_activity_reviews_on_activity_id_and_user_id", unique: true
     t.index ["activity_id"], name: "index_activity_reviews_on_activity_id"
     t.index ["user_id"], name: "index_activity_reviews_on_user_id"
   end
@@ -132,9 +133,9 @@ ActiveRecord::Schema.define(version: 20181202041418) do
     t.string "name"
     t.string "tel"
     t.string "address"
-    t.bigint "city_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "city_id"
     t.index ["city_id"], name: "index_places_on_city_id"
   end
 
@@ -178,6 +179,7 @@ ActiveRecord::Schema.define(version: 20181202041418) do
     t.boolean "flag_is_about_to_asking"
     t.boolean "is_following_bot_for_user"
     t.boolean "is_following_bot_for_circle"
+    t.string "review_name"
     t.index ["owned_circle_id"], name: "index_users_on_owned_circle_id"
   end
 
