@@ -7,7 +7,7 @@ class Circle < ApplicationRecord
   has_many :circle_contents
   has_many :contents, through: :circle_contents
 
-  validate :name, presence: true
+  validates :name, presence: true
 
   def previous_users
     #やりたいことは circle.applicationsのuseridを全て取ってくる。そしてuseridを一つにする。過去の活動なのでactivityのdateは今日よりも前

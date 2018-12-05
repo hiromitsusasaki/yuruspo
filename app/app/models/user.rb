@@ -8,7 +8,7 @@ class User < ApplicationRecord
   has_one :circle
   belongs_to :owned_circle, :class_name => 'Circle', optional: true
 
-  validate :line_user_id, presence: true
+  validates :line_user_id, presence: true
 
 
   def self.find_or_create_from_auth(auth)
