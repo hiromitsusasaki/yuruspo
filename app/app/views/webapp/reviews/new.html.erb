@@ -6,6 +6,18 @@
 <hr />
 <%= form_tag "/circles/#{@activity.circle.id}/activities/#{@activity.id}/reviews" do %>
   <!-- 星のやつの実装の仕方わからねえ -->
+  <div class="evaluation">
+    <input id="star1" type="radio" name="review[evaluation]" value="5" />
+    <label for="star1">★</label>
+    <input id="star2" type="radio" name="review[evaluation]" value="4" />
+    <label for="star2">★</label>
+    <input id="star3" type="radio" name="review[evaluation]" value="3" />
+    <label for="star3">★</label>
+    <input id="star4" type="radio" name="review[evaluation]" value="2" />
+    <label for="star4">★</label>
+    <input id="star5" type="radio" name="review[evaluation]" value="1" />
+    <label for="star5">★</label>
+  </div>
   <div class="mt-2">
     <%= text_area_tag 'review[comment]', '', :class => 'form-control', :rows => 5 %>
   </div>
