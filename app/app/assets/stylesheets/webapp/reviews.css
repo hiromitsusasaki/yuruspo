@@ -5,17 +5,18 @@
 .evaluation{
   display: flex;
   flex-direction: row-reverse;
-  justify-content: center;
+  justify-content: flex-end;
 }
 .evaluation input[type='radio']{
   display: none;
 }
 .evaluation label{
   position: relative;
-  padding: 10px 10px 0;
+  padding: 0px 7px 0;
   color: gray;
   cursor: pointer;
   font-size: 50px;
+  line-height: 1;
 }
 .evaluation label .text{
   position: absolute;
