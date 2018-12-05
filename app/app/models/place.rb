@@ -3,6 +3,6 @@ class Place < ApplicationRecord
   has_many :place_contents
   has_many :contents, through: :place_contents
 
-  validate :name, presence: true
-  validate :address, presence: true
+  validates :name, presence: true
+  validates :address, presence: true
 end

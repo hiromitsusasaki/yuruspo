@@ -3,5 +3,5 @@ class Content < ApplicationRecord
   has_many :circle_contents
   has_many :circles, through: :circle_contents
 
-  validate :name, presence: true
+  validates :name, presence: true
 end

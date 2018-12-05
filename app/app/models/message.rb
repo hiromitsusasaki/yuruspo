@@ -1,5 +1,5 @@
 class Message < ApplicationRecord
   belongs_to :activity
 
-  validate :body, presence: true
+  validates :body, presence: true
 end

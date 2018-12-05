@@ -10,9 +10,9 @@ class Activity < ApplicationRecord
   delegate :content, to: :place_content
   delegate :place, to: :place_content
 
-  validate :date, presence: true
-  validate :start_time, presence: true
-  validate :end_time, presence: true
+  validates :date, presence: true
+  validates :start_time, presence: true
+  validates :end_time, presence: true
 
   def self.where_query(search_query)
     # SQL文を条件に応じて作成
