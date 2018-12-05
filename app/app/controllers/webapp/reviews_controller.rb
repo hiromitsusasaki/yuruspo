@@ -5,7 +5,7 @@ class Webapp::ReviewsController < ApplicationController
     @activity = Activity.find(params[:activity_id])
     @user = current_user
     # 自分のサークルのレビューページに入りそうだったらその人のサークル詳細ページへリダイレクト
-    redirect_to controller: "circles", action: "show", circle_id: @user.owned_circle_id if @activity.circle.owner == @user
+    # redirect_to controller: "circles", action: "show", circle_id: @user.owned_circle_id if @activity.circle.owner == @user
   end
 
   def create
@@ -17,7 +17,10 @@ class Webapp::ReviewsController < ApplicationController
     if current_user.review_name.present? && review.save
       redirect_to :action => "complete", :circle_id => activity.circle.id, :activity_id => activity.id, :review_id => review.id
     else
-      redirect_to :action => 'new', :circle_id => activity.circle.id, :activity_id => activity.id, :flash => {error: 'レビュー登録に失敗しました'}
+      flash[:warning] = 'レビュー登録に失敗しました'
+      flash[:warning] = flash[:warning] + "<br>ニックネームを入力してください。" if current_user.review_name.blank?
+      flash[:warning] = flash[:warning] + "<br>星で評価を指定してください" if review.evaluation.blank?
+      redirect_to :action => 'new', :circle_id => activity.circle.id, :activity_id => activity.id
     end
   end
 
