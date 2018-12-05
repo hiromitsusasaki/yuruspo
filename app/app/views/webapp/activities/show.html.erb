@@ -58,7 +58,7 @@
             </div>
             <div class="col-8">
               <div><%= link_to application.user.display_name, "/circles/#{@activity.circle.id}/activities/#{@activity.id}/applications/#{application.id}" %></div>
-              <div class="font-weight-light chat recently"><%= application.chats.where(speaker: :user).order('created_at desc').first.body.truncate(10) %></div>
+              <div class="font-weight-light chat recently"><%= application.chats.where(speaker: application.user).order('created_at desc').first.body.truncate(10) %></div>
             </div>
             <div class="col-2">
               <span class="badge badge-success"><%= application.chats.where(speaker: :user, is_already_read: false).count %></span>
