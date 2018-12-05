@@ -23,3 +23,18 @@
 .evaluation input[type='radio']:checked ~ label{
   color: #ffcc00;
 }
+
+.star-container{
+  display: flex;
+}
+.star{
+  position: relative;
+  padding: 0px 3px 0;
+  color: gray;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+}
+.star-colored{
+  color: #ffcc00;
+}

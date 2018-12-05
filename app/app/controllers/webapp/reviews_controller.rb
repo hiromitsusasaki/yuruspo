@@ -20,7 +20,9 @@ class Webapp::ReviewsController < ApplicationController
   end
 
   def complete
-    
+    @activity = Activity.find(params[:activity_id])
+    @review = ActivityReview.find(params[:review_id])
+    @user = current_user
   end
 
   private
