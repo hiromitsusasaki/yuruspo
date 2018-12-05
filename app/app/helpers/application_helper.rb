@@ -1,6 +1,6 @@
 module ApplicationHelper
 
-  def content_icon(content_id)
+  def content_icon(content_id, options={})
     case content_id
     when 0
       svg_file_name = "icon_basketball.svg"
@@ -15,7 +15,9 @@ module ApplicationHelper
     when 5
       svg_file_name = "icon_badminton.svg"
     end
-    embedded_svg(svg_file_name,  {class: "icon_content"})
+    options[:class] = options[:class].present? ? options[:class] + " icon_content":"icon_content"
+    puts(options)
+    embedded_svg(svg_file_name, options)
   end
 
   def embedded_svg filename, options={}
@@ -24,6 +26,9 @@ module ApplicationHelper
     svg = doc.at_css 'svg'
     if options[:class].present?
       svg['class'] = options[:class]
+    end
+    if options[:style].present?
+      svg['style'] = options[:style]
     end
     doc.to_html.html_safe
   end

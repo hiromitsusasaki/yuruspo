@@ -1,0 +1,5 @@
+<%#reviewを渡すとreviewの表示カラムを返してくれる%>
+<%=embedded_svg "default_review_icon.svg", style: "width: 30px; height: 30px; margin-right: 5px; margin-bottom: 5px;"%>
+<%=review.user.review_name%>
+<%= render partial: partial("star_preview"), locals: {evaluation: review.evaluation}%>
+<%=simple_format(review.comment) unless review.comment.nil?%>

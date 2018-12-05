@@ -1,5 +1,5 @@
 class Webapp::ActivitiesController < ApplicationController
-  
+
   before_action :authenticate
 
   def new
@@ -26,7 +26,7 @@ class Webapp::ActivitiesController < ApplicationController
     if activity.save
       redirect_to :action => 'show', :circle_id => circle.id, :activity_id => activity.id
     else
-      redirect_to :action => 'new', circle_id => circle.id, :flash => {error: '新規活動登録に失敗しました'}
+      redirect_to :action => 'new', :circle_id => circle.id, :flash => {error: '新規活動登録に失敗しました'}
     end
   end
 
@@ -119,7 +119,7 @@ class Webapp::ActivitiesController < ApplicationController
     def end_time_params
       params.require('end_time').permit(:hour, :minute)
     end
-  
+
     def time(date, hour, minute)
       Time.zone.local(date.year, date.month, date.day, hour.to_i, minute.to_i, 0, 0)
     end
@@ -133,7 +133,7 @@ class Webapp::ActivitiesController < ApplicationController
       date
     end
 
-    def months 
+    def months
       [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
     end
 
