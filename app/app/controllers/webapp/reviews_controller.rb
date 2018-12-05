@@ -13,7 +13,7 @@ class Webapp::ReviewsController < ApplicationController
     review.user = current_user
     current_user.update(review_name: params[:user][:review_name])
     if current_user.review_name.present? && review.save
-      redirect_to :action => "complete", :circle_id => activity.circle.id, :activity_id => activity.id
+      redirect_to :action => "complete", :circle_id => activity.circle.id, :activity_id => activity.id, :review_id => review.id
     else
       redirect_to :action => 'new', :circle_id => activity.circle.id, :activity_id => activity.id, :flash => {error: 'レビュー登録に失敗しました'}
     end
