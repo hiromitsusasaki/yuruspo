@@ -11,8 +11,6 @@ class Webapp::UserBlocksController < ApplicationController
   end
 
   def create
-    p request.referer
-    p params
     p referer = Rails.application.routes.recognize_path(request.referer)
     if referer[:controller] == "webapp/applications" and referer[:action] == "show"
       UserBlock.create(user_id: params[:user_id], circle_id: params[:circle_id])
