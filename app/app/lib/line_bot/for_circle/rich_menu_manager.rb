@@ -3,8 +3,8 @@
     # 基本的にrails cで使う
     # ここのimageとobjectを書き換えてrunの引数に行いたい処理を書いて使う。
     #(現状"create"しか動作確認していない(そんな重要じゃないので後回しにしています))
-    def run str
-      image = File.open("app/assets/images/ricu_menus/root_rich_menu_for_circle.png")
+    def run
+      image = File.open("app/assets/images/rich_menus/root_rich_menu_for_circle.png")
       object = {
         "size": {
           "width": 2500,
@@ -26,13 +26,16 @@
             bounds: {x: 1225, y: 843, width: 1225, height: 843},
             action: {type: "uri", uri: "https://yuruspo.herokuapp.com/activities/new"}
           }
+        ]
       }
-      create_or_update_rich_menu object, image if str == "create"
-      update_rich_menu_object object if str == "updateObject"
-      update_rich_menu_image image if str == "updateImage"
+      create_or_update_rich_menu object, image #if str == "create"
+      set_rich_menu_to_default(get_rich_menu_object_by_name("root")["richMenuId"])
+      # update_rich_menu_object object if str == "updateObject"
+      # update_rich_menu_image image if str == "updateImage"
+
     end
 
-    private
+    # privateg
 
     # すでにあるリッチメニューにのみ意味あり。なかったらエラーを吐く
     def update_rich_menu_image name, image_file
