@@ -133,9 +133,9 @@ ActiveRecord::Schema.define(version: 20181205113653) do
     t.string "name"
     t.string "tel"
     t.string "address"
+    t.bigint "city_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "city_id"
     t.index ["city_id"], name: "index_places_on_city_id"
   end
 
