@@ -16,7 +16,7 @@
         "areas": [
           {
             bounds: {x: 0, y: 0, width: 1225, height: 1686},
-            action: {type: "uri", uri: "https://yuruspo.herokuapp.com/circle"}
+            action: {type: "uri", uri: "https://yuruspo.herokuapp.com/owned_circle"}
           },
           {
             bounds: {x: 1225, y: 0, width: 1225, height: 843},
@@ -24,7 +24,7 @@
           },
           {
             bounds: {x: 1225, y: 843, width: 1225, height: 843},
-            action: {type: "uri", uri: "https://yuruspo.herokuapp.com/activities/new"}
+            action: {type: "uri", uri: "https://yuruspo.herokuapp.com/owned_circle/activities/new"}
           }
         ]
       }
