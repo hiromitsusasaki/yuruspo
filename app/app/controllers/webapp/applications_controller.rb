@@ -14,6 +14,7 @@ class Webapp::ApplicationsController < ApplicationController
 
   def show
     @application = Application.find(params[:application_id])
+    @is_blocking_exists = UserBlock.is_blocking_exists(@application.user, @application.activity.circle)
     if current_user == @application.user or current_user == @application.activity.circle.owner
       @chats = Chat.where(application_id: params[:application_id])
       if @application.activity.circle.owner == current_user
