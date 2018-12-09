@@ -13,8 +13,9 @@ class RoomChannel < ApplicationCable::Channel
     application = Application.find(data['chat']['application_id'])
     chat.body = data['chat']['body']
     chat.application = application
-    chat.is_already_read = true
+    chat.is_already_read = false
     chat.speaker = current_user
     chat.save!
+    LineBot::SendChatNotificationWorker.perform_async(chat.id)
   end
 end
