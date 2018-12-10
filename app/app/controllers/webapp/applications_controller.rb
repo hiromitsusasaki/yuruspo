@@ -3,7 +3,7 @@ class Webapp::ApplicationsController < ApplicationController
   before_action :authenticate
 
   def create
-    application = Application.create(activity_id: params[:activity_id], user_id: current_user.id)
+    application = Application.find_or_create_by(activity_id: params[:activity_id], user_id: current_user.id)
     if params[:is_join_request]
       application.status = :requested
       application.save
