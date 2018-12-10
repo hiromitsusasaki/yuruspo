@@ -14,11 +14,7 @@ class LineBot::ForCircle::Response::FollowResponse < LineBot::ForCircle::Respons
     messages = [
       {
         "type": "text",
-        "text": "" #TODO: リンク
-      },
-      {
-        "type": "text",
-        "text": "詳しい使い方は下のメニューから見れるよ！\nメニュー→使い方から説明を見たい使い方を選んでね"
+        "text": "友達登録ありがとうございます。\nゆるすぽは誰でも参加OKなスポーツ企画に人を集めることができるサービスです。企画の作成はメニューの右下のプラスボタンからできます。" #TODO: リンク
       }
     ]
     LineBot::ForCircle::Client.instance.reply_message(line_bot_event['replyToken'], messages)

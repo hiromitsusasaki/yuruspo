@@ -1,5 +1,5 @@
 class LineBot::ForUser::MessageMaker
-  
+
   def self.suggest_dates_carousel_message(query)
     carousel_message = {
       type: "template",
@@ -47,7 +47,7 @@ class LineBot::ForUser::MessageMaker
           {
             type: "uri",
             label: "詳しく見る",
-            uri: "https://www.flopdesign.com/freefont/flopdesignfont.html"#TODO: リンク
+            uri: "https://yuruspo.herokuapp.com/circles/#{activity.circle.id}/activities/#{activity.id}"#TODO: リンク
           },
           {
             type: "message",
@@ -55,7 +55,7 @@ class LineBot::ForUser::MessageMaker
             text: "他の活動"
           }
         ],
-        thumbnailImageUrl: "https://illustimage.com/photo/117.png",#TODO:リンク
+        # thumbnailImageUrl: "https://illustimage.com/photo/117.png",#TODO:リンク
         title: "#{activity.date.strftime("%-m/%-d(#{wds[activity.date.wday]})")} #{activity.place_content.content.name}",
         text: "場所: #{activity.place_content.place.name}"
       }
@@ -91,10 +91,10 @@ class LineBot::ForUser::MessageMaker
             {
               type: "uri",
               label: "詳しく見る",
-              uri: "https://www.flopdesign.com/freefont/flopdesignfont.html"#TODO: リンク
+              uri: "https://yuruspo.herokuapp.com/circles/#{activity.circle.id}/activities/#{activity.id}"#TODO: リンク
             }
           ],
-          thumbnailImageUrl: "https://illustimage.com/photo/117.png",#TODO:リンク
+          # thumbnailImageUrl: "https://illustimage.com/photo/117.png",#TODO:リンク
         }
         carousel_message[:template][:columns].push(column)
       }
