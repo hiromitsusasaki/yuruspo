@@ -6,9 +6,7 @@ class User < ApplicationRecord
   has_many :activity_reviews
   has_many :chats
   has_one :circle
-  belongs_to :owned_circle, class_name: 'Circle', optional: true
   has_many :blocked_circles, source: 'circle', through: :user_blocks 
-
   validates :line_user_id, presence: true
 
 
@@ -37,6 +35,10 @@ class User < ApplicationRecord
 
   def has_circle?
     !owned_circle.nil?
+  end
+
+  def owned_circle
+    Circle.find_by(owner: self)
   end
 
   def is_blocked?(circle)
