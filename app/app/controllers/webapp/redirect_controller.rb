@@ -1,6 +1,6 @@
 class Webapp::RedirectController < ApplicationController
   
-  before_action :authenticate
+  before_action :authenticate, :when_no_circle
   
   def to_owned_circle_show
     redirect_to :controller => "circles", :action => "show", :circle_id => current_user.owned_circle.id
