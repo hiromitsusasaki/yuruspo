@@ -14,40 +14,67 @@
         <%= text_area_tag 'chat[body]', '', :class => 'form-control', :rows => 3, data: {behavior: 'room_speaker'} %>
       </div>
       <div class="mt-3">
-      <div class="row">
-        <div class="col-2">
-          <%= link_to '+', "", class: "btn btn-primary", data: {toggle: 'modal', target: '#menu-modal'} %>
+        <div class="row">
+          <div class="col-2">
+            <% if current_user == @application.activity.circle.owner %>
+              <%= link_to "", class: "btn btn-primary", data: {toggle: 'modal', target: '#circle-menu-modal'} do %>
+                <%= octicon "list-unordered", :height => 18,  :class => "right left white", :"aria-label" => "hi" %>
+              <% end %>
+            <% else %>
+              <%= link_to "", class: "btn btn-primary", data: {toggle: 'modal', target: '#user-menu-modal'} do %>
+                <%= octicon "list-unordered", :height => 18,  :class => "right left white", :"aria-label" => "hi" %>
+              <% end %>
+            <% end %>
+          </div>
+          <div class="col-10" style="margin-left: -18px; padding-right: 0px">
+            <%= button_tag "送信", id: "chat-send-button", class: "btn btn-primary", style: "width: 100%;" %>
+          </div>
         </div>
-        <div class="col-10">
-          <%= button_tag "送信", id: "chat-send-button", class: "btn btn-primary", style: "width: 100%;" %>
-        </div>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
   </div>
-</div>
-<div class="modal fade" id="menu-modal" tabindex="-1" role="dialog" aria-labelledby="menuModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3>メニュー</h3>
-      </div>
-      <div class="modal-body">
-        <%= link_to "このユーザーをブロックする", "/circles/#{@application.activity.circle.id}/activities/#{@application.activity.id}/user_blocks?user_id=#{@application.user.id}", method: "post" %>
+  <div class="modal fade" id="circle-menu-modal" tabindex="-1" role="dialog" aria-labelledby="circleMenuModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>メニュー</h3>
+        </div>
+        <div class="modal-body">
+          <% if !@application.user.is_blocked?(@application.activity.circle) %>
+            <p><%= link_to "このユーザーをブロックする", "/circles/#{@application.activity.circle.id}/activities/#{@application.activity.id}/user_blocks?user_id=#{@application.user.id}", method: "post" %></p>
+          <% end %>
+          <% if @application.requested? %>
+            <p><%= link_to "参加申し込みを承認する", "/circles/#{@application.activity.circle.id}/activities/#{@application.activity.id}/applications/#{@application.id}?is_join_approve=true", method: "patch" %></p>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
-<div>
-<script>
-  $(document).ready(function(){
+  <div class="modal fade" id="user-menu-modal" tabindex="-1" role="dialog" aria-labelledby="userMenuModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>メニュー</h3>
+        </div>
+        <div class="modal-body">
+          <% if @application.only_chat? %>
+            <%= link_to "参加を申し込む", "/circles/#{@application.activity.circle.id}/activities/#{@application.activity.id}/applications/#{@application.id}?is_join_request=true", method: "patch" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    $(document).ready(function(){
     App.makeChatChannel(<%= @application.id %>)
-  });
-  $('.chat-stream').animate({scrollTop: $('.chat-stream')[0].scrollHeight}, 'fast');
-  $('#chat-send-button').on('click', function() {
+    });
+    $('.chat-stream').animate({scrollTop: $('.chat-stream')[0].scrollHeight}, 'fast');
+    $('#chat-send-button').on('click', function() {
     chat = {
-      body: $('#chat_body').val(),
-      application_id: <%= @application.id %>
+    body: $('#chat_body').val(),
+    application_id: <%= @application.id %>
     }
     App.room.speak(chat);
     $('#chat_body').val("")
-  });
-</script>
+    });
+  </script>

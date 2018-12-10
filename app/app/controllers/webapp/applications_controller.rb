@@ -12,6 +12,19 @@ class Webapp::ApplicationsController < ApplicationController
     redirect_to :action => 'show', :circle_id => application.activity.circle.id, :activity_id => application.activity.id, :application_id => application.id
   end
 
+  def update
+    application = Application.find(params[:application_id])
+    if params[:is_join_request]
+      application.status = :requested
+      Chat.create(application_id: application.id, speaker: current_user, body: "参加リクエストを送りました")
+    elsif params[:is_join_approve]
+      application.status = :approved
+      Chat.create(application_id: application.id, speaker: current_user, body: "参加リクエストを承認しました")
+    end
+    application.save
+    redirect_to action: 'show', circle_id: application.activity.circle.id, activity_id: application.activity.id, application_id: application.id
+  end
+
   def show
     @application = Application.find(params[:application_id])
     @is_blocking_exists = UserBlock.is_blocking_exists(@application.user, @application.activity.circle)

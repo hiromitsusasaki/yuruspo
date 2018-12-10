@@ -40,7 +40,10 @@ class User < ApplicationRecord
   end
 
   def is_blocked?(circle)
-    !blocked_circles.find(circle.id).nil?
+    if blocked_circles.empty?
+      false
+    else
+      blocked_circles.find(circle.id).nil?
+    end
   end
-
 end
