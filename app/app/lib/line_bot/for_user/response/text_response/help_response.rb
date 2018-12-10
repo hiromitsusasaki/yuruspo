@@ -21,8 +21,8 @@ class LineBot::ForUser::Response::TextResponse::HelpResponse < LineBot::ForUser:
     when @trigger_texts[3]
       messages = to_inquiry_messages
       sending_user = User.find_by(line_user_id: line_bot_event['source']['userId'])
-      sending_user.update(flag_is_about_to_asking: true)
-      LineBot::ForUser::CancellFlagWorker.perform_in 30.minutes, "flag_is_about_to_asking", sending_user.line_user_id
+      sending_user.update(flag_about_to_ask_user_bot: true)
+      LineBot::ForUser::CancellFlagWorker.perform_in 30.minutes, "flag_about_to_ask_user_bot", sending_user.line_user_id
     end
     LineBot::ForUser::Client.instance.reply_message(line_bot_event['replyToken'], messages)
   end

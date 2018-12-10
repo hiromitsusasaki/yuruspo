@@ -1,4 +1,4 @@
-class LineBot::ForUser::CancellFlagWorker
+class LineBot::ForCircle::CancellFlagWorker
   include Sidekiq::Worker
   sidekiq_options :retry => 0
 
@@ -14,10 +14,10 @@ class LineBot::ForUser::CancellFlagWorker
 
   def push_notification flag_name, user_id
     case flag_name
-    when "flag_about_to_ask_user_bot"
+    when "flag_about_to_ask_circle_bot"
       messages = cancell_is_about_to_asking_message
     end
-    LineBot::ForUser::PushWorker.perform_async(user_id, messages)
+    LineBot::ForCircle::PushWorker.perform_async(user_id, messages)
   end
 
 
