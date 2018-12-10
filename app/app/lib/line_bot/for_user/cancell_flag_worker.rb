@@ -14,7 +14,7 @@ class LineBot::ForUser::CancellFlagWorker
 
   def push_notification flag_name, user_id
     case flag_name
-    when "flag_is_about_to_asking"
+    when "flag_about_to_ask_user_bot"
       messages = cancell_is_about_to_asking_message
     end
     LineBot::ForUser::PushWorker.perform_async(user_id, messages)

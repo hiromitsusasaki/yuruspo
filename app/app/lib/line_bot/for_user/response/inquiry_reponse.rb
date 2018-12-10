@@ -4,7 +4,7 @@ class LineBot::ForUser::Response::InquiryReponse < LineBot::ForUser::Response::B
 
   def is_responsible(line_bot_event)
     # お問い合わせモードでメッセージが送られてきたら対応
-    if User.find_by(line_user_id: line_bot_event["source"]["userId"]).flag_is_about_to_asking && line_bot_event["type"] == "message"
+    if User.find_by(line_user_id: line_bot_event["source"]["userId"]).flag_about_to_ask_user_bot && line_bot_event["type"] == "message"
       return true
     else
       return false
@@ -14,7 +14,7 @@ class LineBot::ForUser::Response::InquiryReponse < LineBot::ForUser::Response::B
   def run(line_bot_event)
     if line_bot_event["message"]["type"] == "text"
       inquiryUser = User.find_by(line_user_id: line_bot_event["source"]["userId"])
-      inquiryUser.update(flag_is_about_to_asking: false)
+      inquiryUser.update(flag_about_to_ask_user_bot: false)
       Inquiry.new(user_id: inquiryUser.id, body: line_bot_event["message"]["text"], is_responded: false).save
       messages = success_messages
     else
