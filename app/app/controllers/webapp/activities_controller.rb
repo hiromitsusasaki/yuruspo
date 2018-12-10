@@ -31,10 +31,10 @@ class Webapp::ActivitiesController < ApplicationController
       activity.save!
       flash[:success] = '活動予定を登録しました'
       redirect_to action: 'show', circle_id: circle.id, activity_id: activity.id
-    rescue
-      flash[:warning] = '新規活動登録に失敗しました'
-      redirect_to action: 'new', circle_id: circle.id
     end
+  rescue
+    flash[:warning] = '新規活動登録に失敗しました'
+    redirect_to action: 'new', circle_id: circle.id
   end
 
   def show
@@ -73,10 +73,10 @@ class Webapp::ActivitiesController < ApplicationController
       activity.save!
       flash[:success] = '活動予定を編集しました'
       redirect_to action: 'show', circle_id: activity.circle.id, activity_id: activity.id
-    rescue
-      flash[:warning] = '活動予定の編集に失敗しました'
-      redirect_to action: 'edit', circle_id: activity.circle.id, activity_id: activity.id
     end
+  rescue
+    flash[:warning] = '活動予定の編集に失敗しました'
+    redirect_to action: 'edit', circle_id: activity.circle.id, activity_id: activity.id
   end
 
   def destroy
@@ -98,10 +98,10 @@ class Webapp::ActivitiesController < ApplicationController
       activity.destroy!
       flash[:success] = '活動予定を削除しました'
       redirect_to controller: 'circles', action: 'show', circle_id: circle.id
-    rescue => e
-      flash[:warning] = '活動予定の削除に失敗しました'
-      redirect_to action: 'edit', circle_id: activity.circle.id, activity_id: activity.id
     end
+  rescue
+    flash[:warning] = '活動予定の削除に失敗しました'
+    redirect_to action: 'edit', circle_id: activity.circle.id, activity_id: activity.id
   end
 
   private
