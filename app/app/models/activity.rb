@@ -26,7 +26,7 @@ class Activity < ApplicationRecord
     where_arr.push(search_query.content) unless search_query.content.nil?
     where_arr.push(search_query.city) unless search_query.content.nil?
     where_arr.push(search_query.date) unless search_query.date.nil?
-    p activity = Activity.joins(place_content: :place).select("activities.id, activities.circle_id, activities.place_content_id, activities.date, place_contents.*, places.city_id").where(where_arr)
+    p activity = Activity.joins(place_content: :place).select("activities.*, place_contents.*, places.city_id").where(where_arr)
     return activity
   end
 
