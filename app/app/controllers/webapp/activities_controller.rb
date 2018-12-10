@@ -13,7 +13,8 @@ class Webapp::ActivitiesController < ApplicationController
   def create
     circle = Circle.find(params[:circle_id])
     if prefecture_params[:name].blank? or city_params[:name].blank?
-      return redirect_to :action => 'new', :circle_id => circle.id, :flash => {error: '新規活動登録に失敗しました'}
+      flash[:warning] = '活動予定の登録に失敗しました'
+      return redirect_to action: 'new', circle_id: circle.id
     end
     ActiveRecord::Base.transaction do
       activity = Activity.new(activity_params)
@@ -28,10 +29,12 @@ class Webapp::ActivitiesController < ApplicationController
       activity.start_time = time(date, start_time_params[:hour], start_time_params[:minute])
       activity.end_time = time(date, end_time_params[:hour], end_time_params[:minute])
       activity.save!
+      flash[:success] = '活動予定を登録しました'
+      redirect_to action: 'show', circle_id: circle.id, activity_id: activity.id
+    rescue
+      flash[:warning] = '新規活動登録に失敗しました'
+      redirect_to action: 'new', circle_id: circle.id
     end
-    redirect_to :action => 'show', :circle_id => circle.id, :activity_id => activity.id
-    rescue => e
-    redirect_to :action => 'new', circle_id => circle.id, :flash => {error: '新規活動登録に失敗しました'}
   end
 
   def show
@@ -52,7 +55,8 @@ class Webapp::ActivitiesController < ApplicationController
   def update
     activity = Activity.find(params[:activity_id])
     if prefecture_params[:name].blank? or city_params[:name].blank?
-      return redirect_to :action => 'new', :circle_id => circle.id, :flash => {error: '新規活動登録に失敗しました'}
+      flash[:warning] = '活動予定の編集に失敗しました'
+      return redirect_to action: 'new', circle_id: circle.id
     end
     ActiveRecord::Base.transaction do
       activity.max_member_number = activity_params[:max_member_number]
@@ -67,10 +71,12 @@ class Webapp::ActivitiesController < ApplicationController
       activity.start_time = time(date, start_time_params[:hour], start_time_params[:minute])
       activity.end_time = time(date, end_time_params[:hour], end_time_params[:minute])
       activity.save!
+      flash[:success] = '活動予定を編集しました'
+      redirect_to action: 'show', circle_id: activity.circle.id, activity_id: activity.id
+    rescue
+      flash[:warning] = '活動予定の編集に失敗しました'
+      redirect_to action: 'edit', circle_id: activity.circle.id, activity_id: activity.id
     end
-    redirect_to :action => 'show', :circle_id => activity.circle.id, :activity_id => activity.id
-    rescue => e
-    redirect_to :action => 'edit', :circle_id => activity.circle.id, :activity_id => activity.id, :flash => {error: '新規活動登録に失敗しました'}
   end
 
   def destroy
@@ -90,10 +96,12 @@ class Webapp::ActivitiesController < ApplicationController
         application.destroy!
       end
       activity.destroy!
-    end
-      redirect_to :controller => 'circles', :action => 'show', :circle_id => circle.id
+      flash[:success] = '活動予定を削除しました'
+      redirect_to controller: 'circles', action: 'show', circle_id: circle.id
     rescue => e
-      redirect_to :action => 'edit', :circle_id => activity.circle.id, :activity_id => activity.id
+      flash[:warning] = '活動予定の削除に失敗しました'
+      redirect_to action: 'edit', circle_id: activity.circle.id, activity_id: activity.id
+    end
   end
 
   private

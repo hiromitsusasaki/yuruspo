@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181210040706) do
+ActiveRecord::Schema.define(version: 20181210125218) do
 
   create_table "activities", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "circle_id"
@@ -134,9 +134,9 @@ ActiveRecord::Schema.define(version: 20181210040706) do
     t.string "name"
     t.string "tel"
     t.string "address"
+    t.bigint "city_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "city_id"
     t.index ["city_id"], name: "index_places_on_city_id"
   end
 
@@ -176,13 +176,11 @@ ActiveRecord::Schema.define(version: 20181210040706) do
     t.text "status_message"
     t.string "picture_url"
     t.string "line_user_id"
-    t.bigint "owned_circle_id"
     t.boolean "flag_about_to_ask_user_bot"
     t.boolean "is_following_bot_for_user"
     t.boolean "is_following_bot_for_circle"
     t.string "review_name"
     t.boolean "flag_about_to_ask_circle_bot"
-    t.index ["owned_circle_id"], name: "index_users_on_owned_circle_id"
   end
 
   add_foreign_key "activities", "circles"
@@ -208,5 +206,4 @@ ActiveRecord::Schema.define(version: 20181210040706) do
   add_foreign_key "search_queries", "users"
   add_foreign_key "user_blocks", "circles"
   add_foreign_key "user_blocks", "users"
-  add_foreign_key "users", "circles", column: "owned_circle_id"
 end

@@ -14,13 +14,6 @@
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <script>
-      $(document).ready(function() {
-        $('#simple-menu').sidr({
-          side: 'right'
-        });
-      });
-    </script>
   </head>
   <body>
     <div id="sidr">
@@ -39,12 +32,19 @@
       </nav>
       <div class="container">
         <% flash.each do |name, msg| %>
-        <div class="alert alert-<%= name %> mt-2">
-          <%= msg.html_safe %>
-        </div>
+          <div class="alert alert-<%= name %> mt-2">
+            <%= msg.html_safe %>
+          </div>
         <% end %>
         <%= yield %>
-      <div>
-    </div>
-  </body>
-</html>
+        <div>
+        </div>
+        <script>
+          $(document).ready(function() {
+            $('#simple-menu').sidr({
+              side: 'right'
+            });
+          });
+        </script>
+      </body>
+    </html>
