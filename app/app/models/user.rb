@@ -46,5 +46,4 @@ class User < ApplicationRecord
       blocked_circles.find(circle.id).nil?
     end
   end
-
 end
