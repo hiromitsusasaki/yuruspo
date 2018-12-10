@@ -3,6 +3,7 @@ class Chat < ApplicationRecord
   belongs_to :speaker, class_name: 'User'
   validates :body, presence: true
   after_create_commit {ChatBroadcastJob.perform_later self }
+  after_create :send_notify
 
   def is_from_circle_owner
     return self.circle_owner == self.speaker
@@ -28,4 +29,7 @@ class Chat < ApplicationRecord
     return self.application.activity.circle.owner
   end
 
+  def send_notify
+    LineBot::SendChatNotificationWorker.perform_async(self.id)
+  end
 end

@@ -16,6 +16,5 @@ class RoomChannel < ApplicationCable::Channel
     chat.is_already_read = false
     chat.speaker = current_user
     chat.save!
-    LineBot::SendChatNotificationWorker.perform_async(chat.id)
   end
 end
