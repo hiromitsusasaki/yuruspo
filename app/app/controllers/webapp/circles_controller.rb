@@ -7,18 +7,23 @@ class Webapp::CirclesController < ApplicationController
   end
 
   def create
-    circle = Circle.new(circle_params)
-    circle.owner = current_user
-    circle.save
-    current_user.owned_circle = circle
-    current_user.save
-    params[:content_ids].each do |content_id|
-      circle_content = CircleContent.new
-      circle_content.circle = circle
-      circle_content.content = Content.find(content_id)
-      circle_content.save
+    ActiveRecord::Base.transaction do
+      circle = Circle.new(circle_params)
+      circle.owner = current_user
+      circle.save!
+      current_user.save!
+      params[:content_ids].each do |content_id|
+        circle_content = CircleContent.new
+        circle_content.circle = circle
+        circle_content.content = Content.find(content_id)
+        circle_content.save!
+      end
+      flash[:success] = "サークル情報を登録しました"
+      redirect_to action: 'show', circle_id: circle.id
     end
-    redirect_to :action => 'show', :circle_id => circle.id
+  rescue
+    flash[:warning] = "サークル情報の登録に失敗しました"
+    redirect_to action: 'new'
   end
 
   def show
@@ -31,15 +36,22 @@ class Webapp::CirclesController < ApplicationController
   end
 
   def update
-    circle = Circle.update(circle_params)[0]
-    circle.circle_contents.destroy_all
-    params[:content_ids].each do |content_id|
-      circle_content = CircleContent.new
-      circle_content.circle = circle
-      circle_content.content = Content.find(content_id)
-      circle_content.save
+    ActiveRecord::Base.transaction do
+      circle = Circle.find(params[:circle_id])
+      circle.circle_contents.destroy_all
+      params[:content_ids].each do |content_id|
+        circle_content = CircleContent.new
+        circle_content.circle = circle
+        circle_content.content = Content.find(content_id)
+        circle_content.save
+      end
+      circle.update(circle_params)
+      flash[:success] = "サークル情報を編集しました"
+      redirect_to action: 'show', circle_id: circle.id
     end
-    redirect_to :action => 'show', :circle_id => circle.id
+  rescue
+    flash[:warning] = "サークル情報の編集に失敗しました"
+    redirect_to  action: 'edit', circle_id: circle.id
   end
 
   private
