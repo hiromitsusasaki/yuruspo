@@ -66,8 +66,8 @@ class LineBot::ForUser::Response::TextResponse::HelpResponse < LineBot::ForUser:
             type: "message",
             text: @trigger_texts[3],
             area: {
-              x: 187,
-              y: 127,
+              x: 520,
+              y: 352,
               width: 520,
               height: 352
             }
