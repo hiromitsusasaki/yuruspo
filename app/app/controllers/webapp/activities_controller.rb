@@ -31,7 +31,7 @@ class Webapp::ActivitiesController < ApplicationController
     end
     redirect_to :action => 'show', :circle_id => circle.id, :activity_id => activity.id
     rescue => e
-    redirect_to :action => 'new', circle_id => circle.id, :flash => {error: '新規活動登録に失敗しました'}
+    redirect_to :action => 'new', :circle_id => circle.id, :flash => {error: '新規活動登録に失敗しました'}
   end
 
   def show
