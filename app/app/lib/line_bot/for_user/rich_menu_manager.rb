@@ -2,8 +2,8 @@ class LineBot::ForUser::RichMenuManager
   # 基本的にrails cで使う
   # ここのimageとobjectを書き換えてrunの引数に行いたい処理を書いて使う。
   #(現状"create"しか動作確認していない(そんな重要じゃないので後回しにしています))
-  def run str
-    image = File.open("app/assets/images/ricu_menus/root_rich_menu.png")
+  def run
+    image = File.open("app/assets/images/rich_menus/root_rich_menu.png")
     object = {
       "size": {
         "width": 2500,
@@ -27,16 +27,17 @@ class LineBot::ForUser::RichMenuManager
         },
         {
           bounds: {x: 1667, y: 843, width: 833, height: 843},
-          action: {type: "uri", uri: "https://developers.line.biz/ja/reference/messaging-api/#message-action"}
+          action: {type: "uri", uri: " https://yuruspo.herokuapp.com/landing/user"}
         }
       ]
     }
-    create_or_update_rich_menu object, image if str == "create"
-    update_rich_menu_object object if str == "updateObject"
-    update_rich_menu_image image if str == "updateImage"
+    create_or_update_rich_menu object, image #if str == "create"
+    set_rich_menu_to_default(get_rich_menu_object_by_name("root")["richMenuId"])
+    # update_rich_menu_object object if str == "updateObject"
+    # update_rich_menu_image image if str == "updateImage"
   end
 
-  private
+  # private
 
   # すでにあるリッチメニューにのみ意味あり。なかったらエラーを吐く
   def update_rich_menu_image name, image_file
