@@ -20,7 +20,7 @@
           },
           {
             bounds: {x: 1225, y: 0, width: 1225, height: 843},
-            action: {type: "message", text: "ヘルプ"}
+            action: {type: "message", text: "お問い合わせ"}
           },
           {
             bounds: {x: 1225, y: 843, width: 1225, height: 843},
