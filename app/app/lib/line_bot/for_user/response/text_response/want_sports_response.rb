@@ -72,28 +72,28 @@ class LineBot::ForUser::Response::TextResponse::WantSportsResponse < LineBot::Fo
             area: {
               x: 0,
               y: 0,
-              width: 125,
-              height: 127
+              width: 346,
+              height: 352
             }
           },
           {
             type: "message",
             text: "フットサル",
             area: {
-              x: 125,
+              x: 346,
               y: 0,
-              width: 125,
-              height: 127
+              width: 346,
+              height: 352
             }
           },
           {
             type: "message",
             text: "バレー",
             area: {
-              x: 250,
+              x: 692,
               y: 0,
-              width: 125,
-              height: 127
+              width: 346,
+              height: 352
             }
           },
           {
@@ -101,29 +101,29 @@ class LineBot::ForUser::Response::TextResponse::WantSportsResponse < LineBot::Fo
             text: "野球",
             area: {
               x: 0,
-              y: 127,
-              width: 125,
-              height: 127
+              y: 352,
+              width: 346,
+              height: 352
             }
           },
           {
             type: "message",
             text: "テニス",
             area: {
-              x: 125,
-              y: 127,
-              width: 125,
-              height: 127
+              x: 346,
+              y: 352,
+              width: 346,
+              height: 352
             }
           },
           {
             type: "message",
             text: "バドミントン",
             area: {
-              x: 250,
-              y: 127,
-              width: 125,
-              height: 127
+              x: 692,
+              y: 352,
+              width: 346,
+              height: 352
             }
           }
         ]

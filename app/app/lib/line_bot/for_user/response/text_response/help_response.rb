@@ -48,8 +48,8 @@ class LineBot::ForUser::Response::TextResponse::HelpResponse < LineBot::ForUser:
             area: {
               x: 0,
               y: 0,
-              width: 375,
-              height: 127
+              width: 1040,
+              height: 352
             }
           },
           {
@@ -57,9 +57,9 @@ class LineBot::ForUser::Response::TextResponse::HelpResponse < LineBot::ForUser:
             text: @trigger_texts[2],
             area: {
               x: 0,
-              y: 127,
-              width: 187,
-              height: 127
+              y: 352,
+              width: 520,
+              height: 352
             }
           },
           {
@@ -68,8 +68,8 @@ class LineBot::ForUser::Response::TextResponse::HelpResponse < LineBot::ForUser:
             area: {
               x: 187,
               y: 127,
-              width: 188,
-              height: 127
+              width: 520,
+              height: 352
             }
           }
         ]
