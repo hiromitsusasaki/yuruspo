@@ -54,6 +54,7 @@ Rails.application.routes.draw do
   post 'circles/:circle_id/activities/:activity_id/applications/', to: 'webapp/applications#create'
   delete 'circles/:circle_id/activities/:activity_id/applications/:application_id', to: 'webapp/applications#destroy'
   get 'circles/:circle_id/activities/:activity_id/applications/:application_id', to: 'webapp/applications#show'
+  patch 'circles/:circle_id/activities/:activity_id/applications/:application_id', to: 'webapp/applications#update'
 
   # reviews
   get 'circles/:circle_id/activities/:activity_id/reviews/new', to: 'webapp/reviews#new'
