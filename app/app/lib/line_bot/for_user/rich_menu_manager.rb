@@ -27,7 +27,7 @@ class LineBot::ForUser::RichMenuManager
         },
         {
           bounds: {x: 1667, y: 843, width: 833, height: 843},
-          action: {type: "uri", uri: " https://yuruspo.herokuapp.com/landing/user"}
+          action: {type: "uri", uri: "https://yuruspo.herokuapp.com/landing/user"}
         }
       ]
     }
