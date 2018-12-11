@@ -13,16 +13,27 @@ class Webapp::UserBlocksController < ApplicationController
   def create
     p referer = Rails.application.routes.recognize_path(request.referer)
     if referer[:controller] == "webapp/applications" and referer[:action] == "show"
-      UserBlock.create(user_id: params[:user_id], circle_id: params[:circle_id])
-      redirect_to controller: 'applications', action: 'show', circle_id: referer[:circle_id], \
-        activity_id: referer[:activity_id], application_id: referer[:application_id]
-    else
-      user_blocks_params[:user_ids].each do |user_id|
-        UserBlock.create(user_id: user_id, circle_id: params[:circle_id])
+      if UserBlock.create(user_id: params[:user_id], circle_id: params[:circle_id])
+        flash[:success] = "指定したユーザーをブロックしました"
+        redirect_to controller: 'applications', action: 'show', circle_id: referer[:circle_id], \
+          activity_id: referer[:activity_id], application_id: referer[:application_id]
+      else
+        flash[:warning] = "指定したユーザーのブロックに失敗しました"
+        redirect_to controller: 'applications', action: 'show', circle_id: referer[:circle_id], \
+          activity_id: referer[:activity_id], application_id: referer[:application_id]
       end
-      flash[:success] = "指定したユーザーをブロックしました"
-      redirect_to action: "new", circle_id: params[:circle_id], activity_id: params[:activity_id]
+    else
+      ActiveRecord::Base.transaction do
+        user_blocks_params[:user_ids].each do |user_id|
+          UserBlock.create(user_id: user_id, circle_id: params[:circle_id])
+        end
+        flash[:success] = "指定したユーザーをブロックしました"
+        redirect_to action: "new", circle_id: params[:circle_id], activity_id: params[:activity_id]
+      end
     end
+  rescue
+    flash[:warning] = "指定したユーザーのブロックに失敗しました"
+    redirect_to action: "new", circle_id: params[:circle_id], activity_id: params[:activity_id]
   end
 
   private
