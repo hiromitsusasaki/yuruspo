@@ -14,11 +14,13 @@ function initAutocomplete() {
 
 function setPlaceInfo() {
   var place = autocomplete.getPlace();
+  console.log(place)
   var name = place.name
   var phone_number = place.formatted_phone_number;
   var address = place.formatted_address;
-  var prefecture_name;
-  var city_name;
+  var prefecture_name = "";
+  var city_name = "";
+  var area_name = "";
   place.address_components.forEach(function (val, index) {
     switch (val.types[0]) {
       case "administrative_area_level_1":
@@ -27,13 +29,15 @@ function setPlaceInfo() {
       case "locality":
         city_name = val.long_name;
         break;
+      case "sublocality_level_1":
+        area_name = val.long_name;
     }
   });
   document.getElementById('place_name').setAttribute('value', name);
   document.getElementById('place_tel').setAttribute('value', phone_number);
   document.getElementById('place_address').setAttribute('value', address);
   document.getElementById('prefecture_name').setAttribute('value', prefecture_name);
-  document.getElementById('city_name').setAttribute('value', city_name);
+  document.getElementById('city_name').setAttribute('value', city_name + area_name);
 }
 
 function geolocate() {
