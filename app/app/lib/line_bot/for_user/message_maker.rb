@@ -37,7 +37,6 @@ class LineBot::ForUser::MessageMaker
   end
 
   def self.suggest_activity_message(activity)
-    p activity
     wds = ["日", "月", "火", "水", "木", "金", "土"]
     message = {
       type: "template",
