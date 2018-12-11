@@ -26,4 +26,11 @@ class ApplicationController < ActionController::Base
   def not_found
     raise ActionController::RoutingError.new('Not Found')
   end
+
+  def when_no_circle
+    if !current_user.has_circle?
+      redirect_to controller: 'webapp/circles', action: 'new'
+    end
+  end
+
 end
