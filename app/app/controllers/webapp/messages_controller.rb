@@ -16,7 +16,7 @@ class Webapp::MessagesController < ApplicationController
       redirect_to :controller => 'activities', :action => 'show', :circle_id => activity.circle.id, :activity_id => activity.id
     end
   rescue
-    flash[:success] = "メッセージの送信に失敗しました"
+    flash[:warning] = "メッセージの送信に失敗しました"
     redirect_to :controller => 'activities', :action => 'show', :circle_id => activity.circle.id, :activity_id => activity.id
   end
 
